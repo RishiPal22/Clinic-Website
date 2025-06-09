@@ -8,26 +8,49 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+     {/* <!-- Header Section --> */}
+<header class="bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+      
+      {/* <!-- Logo --> */}
+      <div class="flex-shrink-0">
+        <a href="#" class="text-2xl font-bold text-blue-600">MyWebsite</a>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+
+      {/* <!-- Desktop Nav --> */}
+      <nav class="hidden md:flex space-x-6">
+        <a href="#" class="text-gray-700 hover:text-blue-600">Home</a>
+        <a href="#" class="text-gray-700 hover:text-blue-600">About</a>
+        <a href="#" class="text-gray-700 hover:text-blue-600">Services</a>
+        <a href="#" class="text-gray-700 hover:text-blue-600">Contact</a>
+      </nav>
+
+      {/* <!-- Mobile Menu Button --> */}
+      <div class="md:hidden">
+        <button id="menu-button" class="text-gray-700 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    </div>
+
+    {/* <!-- Mobile Nav (hidden by default) --> */}
+    <div id="mobile-menu" class="md:hidden hidden">
+      <a href="#" class="block py-2 text-gray-700 hover:text-blue-600">Home</a>
+      <a href="#" class="block py-2 text-gray-700 hover:text-blue-600">About</a>
+      <a href="#" class="block py-2 text-gray-700 hover:text-blue-600">Services</a>
+      <a href="#" class="block py-2 text-gray-700 hover:text-blue-600">Contact</a>
+    </div>
+  </div>
+</header>
+
+{/* <!-- Script to toggle mobile menu --> */}
+
+
     </>
   )
 }
