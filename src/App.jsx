@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import {Routes,Route}from 'react-router-dom'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
 import ServicesPage from './pages/ServicesPage'
@@ -23,6 +24,7 @@ function App() {
         <Route path="/appointment" element={<AppointmentPage />} />
         <Route path="/contact" element={<ContactPage />} />
      </Routes>
+     <Footer/>
 
 
     </>
