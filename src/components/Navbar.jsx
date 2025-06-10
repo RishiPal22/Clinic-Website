@@ -34,7 +34,7 @@ export default function Navbar() {
           <NavLink to="/services" className={navLinkClass}>Services</NavLink>
           <NavLink to="/appointment" className={navLinkClass}>Appointment</NavLink>
           <NavLink to="/contact" className={navLinkClass}>Contact</NavLink>
-          <NavLink to="/admin" className={navLinkClass}>Admin</NavLink>
+          <NavLink to="/signup" className={navLinkClass}>SignUp</NavLink>
         </div>
 
         {/* Mobile Menu Button */}
@@ -58,7 +58,7 @@ export default function Navbar() {
           <NavLink to="/services" className={navLinkClass} onClick={() => setIsOpen(false)}>Services</NavLink>
           <NavLink to="/appointment" className={navLinkClass} onClick={() => setIsOpen(false)}>Appointment</NavLink>
           <NavLink to="/contact" className={navLinkClass} onClick={() => setIsOpen(false)}>Contact</NavLink>
-          <NavLink to="/admin" className={navLinkClass} onClick={() => setIsOpen(false)}>Admin</NavLink>
+          <NavLink to="/signup" className={navLinkClass} onClick={() => setIsOpen(false)}>SignUp</NavLink>
         </div>
       )}
     </nav>
