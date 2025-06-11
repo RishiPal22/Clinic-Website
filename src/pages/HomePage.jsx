@@ -1,3 +1,5 @@
+import ReviewForm from "../components/ReviewForm";
+
 // src/pages/Home.jsx
 export default function Home() {
   return (
@@ -117,6 +119,10 @@ export default function Home() {
           Book an Appointment
         </a>
       </section>
+
+      <div>
+        <ReviewForm />
+      </div>
 
     </div>
   );
