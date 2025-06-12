@@ -6,6 +6,8 @@ import { Button } from "../components/ui/button"
 import { Card, CardContent } from "../components/ui/card"
 import ReviewForm from "../components/ReviewForm"
 import { supabase } from "../components/SupabaseClient"
+import ReviewList from "@/components/ReviewList"
+
 
 export default function HomePage() {
   const [approvedReviews, setApprovedReviews] = useState([])
@@ -17,85 +19,54 @@ export default function HomePage() {
 
   // Fetch approved reviews from Supabase
   useEffect(() => {
+    const fetchApprovedReviews = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("reviews")
+          .select("*")
+          .order("created_at", { ascending: false })
+          .limit(3)
+
+        if (error) {
+          console.error("Error fetching reviews:", error)
+          setApprovedReviews([])
+        } else {
+          setApprovedReviews(data)
+        }
+      } catch (error) {
+        console.error("Error:", error)
+        setApprovedReviews([])
+      }
+    }
+
+    const fetchStats = async () => {
+      try {
+        const { data, error } = await supabase.from("reviews").select("rating")
+
+        if (error) {
+          console.error("Error fetching stats:", error)
+        } else if (data && data.length > 0) {
+          const totalReviews = data.length
+          const averageRating = data.reduce((sum, review) => sum + review.rating, 0) / totalReviews
+
+          setStats((prev) => ({
+            ...prev,
+            totalReviews,
+            averageRating: Math.round(averageRating * 10) / 10,
+          }))
+        }
+      } catch (error) {
+        console.error("Error:", error)
+      }
+    }
+
     fetchApprovedReviews()
     fetchStats()
   }, [])
 
-  const fetchApprovedReviews = async () => {
-    try {
-      const { data, error } = await supabase
-        .from("reviews")
-        .select("*")
-        .eq("is_approved", true)
-        .order("created_at", { ascending: false })
-        .limit(3)
 
-      if (error) {
-        console.error("Error fetching reviews:", error)
-        // Use fallback reviews if database fetch fails
-        setApprovedReviews(fallbackReviews)
-      } else {
-        setApprovedReviews(data.length > 0 ? data : fallbackReviews)
-      }
-    } catch (error) {
-      console.error("Error:", error)
-      setApprovedReviews(fallbackReviews)
-    }
-  }
 
-  const fetchStats = async () => {
-    try {
-      const { data, error } = await supabase.from("reviews").select("rating").eq("is_approved", true)
 
-      if (error) {
-        console.error("Error fetching stats:", error)
-      } else if (data && data.length > 0) {
-        const totalReviews = data.length
-        const averageRating = data.reduce((sum, review) => sum + review.rating, 0) / totalReviews
-
-        setStats((prev) => ({
-          ...prev,
-          totalReviews,
-          averageRating: Math.round(averageRating * 10) / 10,
-        }))
-      }
-    } catch (error) {
-      console.error("Error:", error)
-    }
-  }
-
-  // Fallback reviews in case Supabase is not set up yet
-  const fallbackReviews = [
-    {
-      id: 1,
-      full_name: "Rohit Sharma",
-      review_text: "Dr. Specialist helped me manage my diabetes without needing insulin. Truly life-changing!",
-      rating: 5,
-      created_at: "2024-01-15",
-    },
-    {
-      id: 2,
-      full_name: "Priya Mehta",
-      review_text: "His cancer treatment plan was both advanced and compassionate. Highly recommended.",
-      rating: 5,
-      created_at: "2024-01-10",
-    },
-    {
-      id: 3,
-      full_name: "Anjali Desai",
-      review_text: "His counseling sessions helped me overcome post-treatment anxiety. A wonderful human being!",
-      rating: 5,
-      created_at: "2024-01-05",
-    },
-  ]
-
-  const getPatientType = (reviewText) => {
-    if (reviewText.toLowerCase().includes("diabetes")) return "Diabetes Patient"
-    if (reviewText.toLowerCase().includes("cancer")) return "Cancer Survivor"
-    if (reviewText.toLowerCase().includes("counseling") || reviewText.toLowerCase().includes("anxiety"))
-      return "Counseling Patient"
-    return "Patient"
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -349,28 +320,8 @@ export default function HomePage() {
               <p className="text-sm text-gray-500">Based on {stats.totalReviews} verified reviews</p>
             )}
           </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {approvedReviews.map((review, index) => (
-              <Card key={review.id || index} className="hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
-                <CardContent className="p-8 space-y-6">
-                  <div className="flex items-center space-x-1">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <blockquote className="text-gray-700 text-lg leading-relaxed italic">
-                    "{review.review_text}"
-                  </blockquote>
-                  <div className="space-y-1">
-                    <div className="font-bold text-gray-900 text-lg">{review.full_name}</div>
-                    <div className="text-sm text-blue-600 font-medium">{getPatientType(review.review_text)}</div>
-                    <div className="text-xs text-gray-400">{new Date(review.created_at).toLocaleDateString()}</div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          {/* Only this line for reviews */}
+          <ReviewList />
         </div>
       </section>
 

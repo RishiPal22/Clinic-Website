@@ -54,6 +54,7 @@ export default function ReviewForm() {
         console.error("Error submitting review:", error)
         setSubmitStatus("error")
       } else {
+        console.log("Review submitted successfully:", data)
         setSubmitStatus("success")
         // Reset form
         setFormData({ fullName: "", email: "", review: "" })
