@@ -25,7 +25,7 @@ export default function Navbar() {
             to="/"
             className="font-extrabold text-2xl tracking-wide bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent"
           >
-            Raj's Clinic
+            Raj Clinic
           </NavLink>
         </div>
 
@@ -35,7 +35,7 @@ export default function Navbar() {
           <NavLink to="/about" className={navLinkClass}>About</NavLink>
           <NavLink to="/services" className={navLinkClass}>Services</NavLink>
           <NavLink to="/appointment" className={navLinkClass}>Appointment</NavLink>
-          <NavLink to="/contact" className={navLinkClass}>Contact</NavLink>
+          <NavLink to="/Blog" className={navLinkClass}>Blogs</NavLink>
           <NavLink
             to="/signup"
             className="bg-yellow-400 text-blue-900 px-4 py-1.5 rounded-full hover:bg-yellow-300 transition font-bold"
@@ -68,7 +68,7 @@ export default function Navbar() {
           <NavLink to="/about" className={navLinkClass} onClick={() => setIsOpen(false)}>About</NavLink>
           <NavLink to="/services" className={navLinkClass} onClick={() => setIsOpen(false)}>Services</NavLink>
           <NavLink to="/appointment" className={navLinkClass} onClick={() => setIsOpen(false)}>Appointment</NavLink>
-          <NavLink to="/contact" className={navLinkClass} onClick={() => setIsOpen(false)}>Contact</NavLink>
+          <NavLink to="/Blog" className={navLinkClass} onClick={() => setIsOpen(false)}>Blogs</NavLink>
           <NavLink
             to="/signup"
             className="block bg-yellow-400 text-blue-900 px-4 py-2 rounded-full hover:bg-yellow-300 font-bold text-center transition"
