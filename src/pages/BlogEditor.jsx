@@ -17,7 +17,7 @@ export default function BlogEditor() {
     featured_image: "",
     is_published: false,
   })
-  const [isLoading, setIsLoading] = useState(false)
+  // const [isLoading, setIsLoading] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
 
   useEffect(() => {

@@ -32,6 +32,9 @@ export default function AdminDashboard() {
   const [appointmentFilter, setAppointmentFilter] = useState("all")
   const [filteredAppointments, setFilteredAppointments] = useState([])
 
+  const [viewBlog, setViewBlog] = useState(null)
+  const [isDeletingBlog, setIsDeletingBlog] = useState(false)
+
   const timeSlots = [
     "09:00 AM",
     "09:30 AM",
@@ -237,6 +240,25 @@ export default function AdminDashboard() {
     }
   }
 
+  const handleDeleteBlog = async (blogId) => {
+    if (!window.confirm("Are you sure you want to delete this blog post?")) return
+    setIsDeletingBlog(true)
+    try {
+      const { error } = await supabase.from("blogs").delete().eq("id", blogId)
+      if (error) {
+        alert("Error deleting blog post")
+        console.error(error)
+      } else {
+        fetchDashboardData()
+      }
+    } catch (err) {
+      alert("An error occurred")
+      console.error(err)
+    } finally {
+      setIsDeletingBlog(false)
+    }
+  }
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -280,11 +302,10 @@ export default function AdminDashboard() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${
-                  activeTab === tab.id
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === tab.id
                     ? "bg-blue-100 text-blue-700 border border-blue-200"
                     : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-                }`}
+                  }`}
               >
                 <tab.icon className="h-5 w-5" />
                 <span>{tab.label}</span>
@@ -603,26 +624,39 @@ export default function AdminDashboard() {
                           <span>{new Date(blog.created_at).toLocaleDateString()}</span>
                           <span>•</span>
                           <span
-                            className={`px-2 py-1 rounded-full text-xs ${
-                              blog.is_published ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"
-                            }`}
+                            className={`px-2 py-1 rounded-full text-xs ${blog.is_published ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"
+                              }`}
                           >
                             {blog.is_published ? "Published" : "Draft"}
                           </span>
                         </div>
                       </div>
                       <div className="flex space-x-2">
-                        <Button size="sm" variant="outline">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => setViewBlog(blog)}
+                        >
                           <Eye className="h-4 w-4 mr-1" />
                           View
                         </Button>
-                        <Button size="sm" variant="outline">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => (window.location.href = `/admin/blog/edit/${blog.id}`)}
+                        >
                           <Edit className="h-4 w-4 mr-1" />
                           Edit
                         </Button>
-                        <Button size="sm" variant="outline" className="border-red-200 text-red-600 hover:bg-red-50">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="border-red-200 text-red-600 hover:bg-red-50"
+                          onClick={() => handleDeleteBlog(blog.id)}
+                          disabled={isDeletingBlog}
+                        >
                           <Trash2 className="h-4 w-4 mr-1" />
-                          Delete
+                          {isDeletingBlog ? "Deleting..." : "Delete"}
                         </Button>
                       </div>
                     </div>
@@ -630,6 +664,32 @@ export default function AdminDashboard() {
                 </Card>
               ))}
             </div>
+
+            {/* Blog View Modal */}
+            {viewBlog && (
+              <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
+                <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto border-2 border-gray-300 shadow-2xl bg-white">
+                  <CardHeader>
+                    <CardTitle className="text-xl font-bold">{viewBlog.title}</CardTitle>
+                    <div className="flex items-center space-x-4 text-sm text-gray-500 mt-2">
+                      <span>By {viewBlog.author}</span>
+                      <span>•</span>
+                      <span>{new Date(viewBlog.created_at).toLocaleDateString()}</span>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="text-gray-700 whitespace-pre-line">
+                      {viewBlog.content || viewBlog.excerpt}
+                    </div>
+                    <div className="flex justify-end">
+                      <Button variant="outline" onClick={() => setViewBlog(null)}>
+                        Close
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
           </div>
         )}
 
