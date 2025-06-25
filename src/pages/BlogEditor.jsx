@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useParams, useNavigate } from "react-router-dom"
 import { Button } from "../components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 import { Input } from "../components/ui/input"
@@ -9,6 +10,8 @@ import { Save, Eye, ArrowLeft } from "lucide-react"
 import { supabase } from "../components/SupabaseClient"
 
 export default function BlogEditor() {
+  const { id } = useParams()
+  const navigate = useNavigate()
   const [blogData, setBlogData] = useState({
     title: "",
     excerpt: "",
@@ -17,9 +20,10 @@ export default function BlogEditor() {
     featured_image: "",
     is_published: false,
   })
-  // const [isLoading, setIsLoading] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
+  const [isLoading, setIsLoading] = useState(!!id)
 
+  // Fetch blog data if editing
   useEffect(() => {
     // Check if user is admin
     const isAdmin = localStorage.getItem("isAdmin")
@@ -34,7 +38,30 @@ export default function BlogEditor() {
       ...prev,
       author: adminUser.full_name || "Admin",
     }))
-  }, [])
+
+    if (id) {
+      // Editing: fetch blog data
+      const fetchBlog = async () => {
+        setIsLoading(true)
+        const { data, error } = await supabase.from("blogs").select("*").eq("id", id).single()
+        if (error) {
+          alert("Error fetching blog post")
+          setIsLoading(false)
+          return
+        }
+        setBlogData({
+          title: data.title || "",
+          excerpt: data.excerpt || "",
+          content: data.content || "",
+          author: data.author || adminUser.full_name || "Admin",
+          featured_image: data.featured_image || "",
+          is_published: data.is_published || false,
+        })
+        setIsLoading(false)
+      }
+      fetchBlog()
+    }
+  }, [id])
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -46,7 +73,6 @@ export default function BlogEditor() {
 
   const handleSave = async (publish = false) => {
     setIsSaving(true)
-
     try {
       const blogToSave = {
         ...blogData,
@@ -54,7 +80,14 @@ export default function BlogEditor() {
         updated_at: new Date().toISOString(),
       }
 
-      const { data, error } = await supabase.from("blogs").insert([blogToSave])
+      let error
+      if (id) {
+        // Update existing blog
+        ;({ error } = await supabase.from("blogs").update(blogToSave).eq("id", id))
+      } else {
+        // Create new blog
+        ;({ error } = await supabase.from("blogs").insert([blogToSave]))
+      }
 
       if (error) {
         console.error("Error saving blog:", error)
@@ -63,13 +96,21 @@ export default function BlogEditor() {
       }
 
       alert(publish ? "Blog post published successfully!" : "Blog post saved as draft!")
-      window.location.href = "/admin/dashboard"
+      navigate("/admin/dashboard")
     } catch (error) {
       console.error("Error:", error)
       alert("An error occurred while saving")
     } finally {
       setIsSaving(false)
     }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    )
   }
 
   return (
@@ -79,13 +120,13 @@ export default function BlogEditor() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-4">
-              <Button onClick={() => (window.location.href = "/admin/dashboard")} variant="outline" size="sm">
+              <Button onClick={() => navigate("/admin/dashboard")} variant="outline" size="sm">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back to Dashboard
               </Button>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">Blog Editor</h1>
-                <p className="text-gray-600">Create a new blog post</p>
+                <p className="text-gray-600">{id ? "Edit blog post" : "Create a new blog post"}</p>
               </div>
             </div>
             <div className="flex space-x-3">
