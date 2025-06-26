@@ -1,13 +1,27 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Phone, Mail, MapPin, Calendar, Shield, Heart, Users, Star, CheckCircle, Clock, Award } from "lucide-react"
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Calendar,
+  Shield,
+  Heart,
+  Users,
+  Star,
+  CheckCircle,
+  Clock,
+  Award,
+  FileText,
+  ArrowRight,
+  User,
+} from "lucide-react"
 import { Button } from "../components/ui/button"
 import { Card, CardContent } from "../components/ui/card"
 import ReviewForm from "../components/ReviewForm"
 import { supabase } from "../components/SupabaseClient"
 import ReviewList from "@/components/ReviewList"
-
 
 export default function HomePage() {
   const [approvedReviews, setApprovedReviews] = useState([])
@@ -16,6 +30,9 @@ export default function HomePage() {
     averageRating: 4.9,
     totalReviews: 0,
   })
+
+  const [blogs, setBlogs] = useState([])
+  const [isLoadingBlogs, setIsLoadingBlogs] = useState(true)
 
   // Fetch approved reviews from Supabase
   useEffect(() => {
@@ -60,13 +77,60 @@ export default function HomePage() {
       }
     }
 
+    const fetchBlogs = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("blogs")
+          .select("*")
+          .eq("is_published", true)
+          .order("created_at", { ascending: false })
+          .limit(5)
+
+        if (error) {
+          console.error("Error fetching blogs:", error)
+          setBlogs([])
+        } else {
+          setBlogs(data || [])
+        }
+      } catch (error) {
+        console.error("Error:", error)
+        setBlogs([])
+      } finally {
+        setIsLoadingBlogs(false)
+      }
+    }
+
     fetchApprovedReviews()
     fetchStats()
+    fetchBlogs()
   }, [])
 
+  const createSlug = (title) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9 -]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-")
+  }
 
+  const getReadingTime = (content) => {
+    const wordsPerMinute = 200
+    const wordCount = content ? content.split(" ").length : 0
+    const readingTime = Math.ceil(wordCount / wordsPerMinute)
+    return `${readingTime} min read`
+  }
 
-
+  const getCategoryColor = (category) => {
+    const colors = {
+      "Diabetes Care": "bg-blue-100 text-blue-700 border-blue-200",
+      "Cancer Treatment": "bg-purple-100 text-purple-700 border-purple-200",
+      "Mental Health": "bg-green-100 text-green-700 border-green-200",
+      "General Health": "bg-orange-100 text-orange-700 border-orange-200",
+      Nutrition: "bg-yellow-100 text-yellow-700 border-yellow-200",
+      Prevention: "bg-indigo-100 text-indigo-700 border-indigo-200",
+    }
+    return colors[category] || "bg-gray-100 text-gray-700 border-gray-200"
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -322,6 +386,164 @@ export default function HomePage() {
           </div>
           {/* Only this line for reviews */}
           <ReviewList />
+        </div>
+      </section>
+
+      {/* Blog Section */}
+      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center space-y-4 mb-16">
+            <div className="flex items-center justify-center space-x-2 text-blue-600">
+              <FileText className="h-5 w-5" />
+              <span className="text-sm font-medium uppercase tracking-wide">Health & Wellness</span>
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900">Latest Health Insights</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Stay informed with expert advice on diabetes management, cancer treatment, and mental health from Dr.
+              Sanjay Pal
+            </p>
+          </div>
+
+          {isLoadingBlogs ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <Card key={i} className="overflow-hidden shadow-lg animate-pulse">
+                  <div className="h-48 bg-gray-200"></div>
+                  <CardContent className="p-6">
+                    <div className="h-4 bg-gray-200 rounded mb-4"></div>
+                    <div className="h-6 bg-gray-200 rounded mb-3"></div>
+                    <div className="space-y-2">
+                      <div className="h-3 bg-gray-200 rounded"></div>
+                      <div className="h-3 bg-gray-200 rounded w-3/4"></div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : blogs.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {blogs.slice(0, 5).map((blog, index) => (
+                <Card
+                  key={blog.id}
+                  className={`group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border-0 ${
+                    index === 0 ? "md:col-span-2 lg:col-span-2 xl:col-span-2" : ""
+                  }`}
+                >
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={blog.featured_image || "/placeholder.svg?height=300&width=400"}
+                      alt={blog.title}
+                      className={`w-full object-cover group-hover:scale-110 transition-transform duration-500 ${
+                        index === 0 ? "h-64" : "h-48"
+                      }`}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                    {/* Category Badge */}
+                    <div className="absolute top-4 left-4">
+                      <span
+                        className={`px-3 py-1 text-xs font-semibold rounded-full border ${getCategoryColor(blog.category || "General Health")}`}
+                      >
+                        {blog.category || "Health Tips"}
+                      </span>
+                    </div>
+
+                    {/* Reading Time */}
+                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                      <div className="flex items-center space-x-1 text-xs text-gray-700 font-medium">
+                        <Clock className="h-3 w-3" />
+                        <span>{getReadingTime(blog.content)}</span>
+                      </div>
+                    </div>
+
+                    {/* Featured Badge for first blog */}
+                    {index === 0 && (
+                      <div className="absolute bottom-4 left-4">
+                        <span className="px-3 py-1 bg-yellow-400 text-yellow-900 text-xs font-bold rounded-full">
+                          FEATURED
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <CardContent className={`space-y-4 ${index === 0 ? "p-8" : "p-6"}`}>
+                    {/* Meta Information */}
+                    <div className="flex items-center justify-between text-sm text-gray-500">
+                      <div className="flex items-center space-x-3">
+                        <div className="flex items-center space-x-1">
+                          <User className="h-4 w-4" />
+                          <span className="font-medium">{blog.author}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Calendar className="h-4 w-4" />
+                          <span>
+                            {new Date(blog.created_at).toLocaleDateString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            })}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    <h3
+                      className={`font-bold text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300 ${
+                        index === 0 ? "text-2xl" : "text-xl"
+                      }`}
+                    >
+                      {blog.title}
+                    </h3>
+
+                    {/* Excerpt */}
+                    <p
+                      className={`text-gray-600 leading-relaxed ${
+                        index === 0 ? "line-clamp-4 text-lg" : "line-clamp-3"
+                      }`}
+                    >
+                      {blog.excerpt}
+                    </p>
+
+                    {/* Read More Button */}
+                    <div className="pt-4">
+                      <Button
+                        onClick={() => (window.location.href = `/blog/${createSlug(blog.title)}-${blog.id}`)}
+                        variant="ghost"
+                        className="group/btn p-0 h-auto font-semibold text-blue-600 hover:text-blue-700 hover:bg-transparent"
+                      >
+                        <span>Read Full Article</span>
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
+                      </Button>
+                    </div>
+                  </CardContent>
+
+                  {/* Hover Effect Overlay */}
+                  <div className="absolute inset-0 border-2 border-blue-500 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <FileText className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No blog posts yet</h3>
+              <p className="text-gray-600">Check back soon for health and wellness articles!</p>
+            </div>
+          )}
+
+          {blogs.length > 0 && (
+            <div className="text-center mt-12">
+              <Button
+                onClick={() => (window.location.href = "/blog")}
+                variant="outline"
+                size="lg"
+                className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 group"
+              >
+                View All Articles
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 
