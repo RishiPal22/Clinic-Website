@@ -12,7 +12,6 @@ export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("overview")
   const [stats, setStats] = useState({
     totalReviews: 0,
-    pendingReviews: 0,
     totalAppointments: 0,
     totalBlogs: 0,
   })
@@ -93,7 +92,6 @@ export default function AdminDashboard() {
       // Calculate stats
       setStats({
         totalReviews: reviewsData?.length || 0,
-        pendingReviews: reviewsData?.filter((r) => !r.is_approved).length || 0,
         totalAppointments: appointmentsData?.length || 0,
         totalBlogs: blogsData?.length || 0,
       })
@@ -111,23 +109,7 @@ export default function AdminDashboard() {
     window.location.href = "/admin/login"
   }
 
-  const approveReview = async (reviewId) => {
-    try {
-      await supabase.from("reviews").update({ is_approved: true }).eq("id", reviewId)
-      fetchDashboardData()
-    } catch (error) {
-      console.error("Error approving review:", error)
-    }
-  }
-
-  const rejectReview = async (reviewId) => {
-    try {
-      await supabase.from("reviews").delete().eq("id", reviewId)
-      fetchDashboardData()
-    } catch (error) {
-      console.error("Error rejecting review:", error)
-    }
-  }
+  // Removed approveReview and rejectReview functions
 
   const StatCard = ({ title, value, icon: Icon, color = "blue" }) => (
     <Card className="hover:shadow-lg transition-shadow duration-300">
@@ -259,6 +241,23 @@ export default function AdminDashboard() {
     }
   }
 
+  // Add this function to handle review deletion
+  const handleDeleteReview = async (reviewId) => {
+    if (!window.confirm("Are you sure you want to delete this review?")) return
+    try {
+      const { error } = await supabase.from("reviews").delete().eq("id", reviewId)
+      if (error) {
+        alert("Error deleting review")
+        console.error(error)
+      } else {
+        fetchDashboardData()
+      }
+    } catch (err) {
+      alert("An error occurred")
+      console.error(err)
+    }
+  }
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -319,7 +318,7 @@ export default function AdminDashboard() {
           <div className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <StatCard title="Total Reviews" value={stats.totalReviews} icon={Star} color="yellow" />
-              <StatCard title="Pending Reviews" value={stats.pendingReviews} icon={Clock} color="orange" />
+              {/* Removed Pending Reviews StatCard */}
               <StatCard title="Appointments" value={stats.totalAppointments} icon={Calendar} color="green" />
               <StatCard title="Blog Posts" value={stats.totalBlogs} icon={FileText} color="purple" />
             </div>
@@ -347,11 +346,7 @@ export default function AdminDashboard() {
                               <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                             ))}
                           </div>
-                          {!review.is_approved && (
-                            <span className="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">
-                              Pending
-                            </span>
-                          )}
+                          {/* Removed Pending badge */}
                         </div>
                       </div>
                     ))}
@@ -397,7 +392,7 @@ export default function AdminDashboard() {
 
             <div className="grid gap-6">
               {reviews.map((review) => (
-                <Card key={review.id} className={`${!review.is_approved ? "border-orange-200 bg-orange-50" : ""}`}>
+                <Card key={review.id}>
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start">
                       <div className="flex-1">
@@ -408,38 +403,22 @@ export default function AdminDashboard() {
                               <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                             ))}
                           </div>
-                          {!review.is_approved && (
-                            <span className="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">
-                              Pending Approval
-                            </span>
-                          )}
                         </div>
                         <p className="text-gray-700 mb-2">{review.review_text}</p>
                         <p className="text-sm text-gray-500">{review.email}</p>
                         <p className="text-sm text-gray-500">{new Date(review.created_at).toLocaleDateString()}</p>
                       </div>
-                      <div className="flex space-x-2">
-                        {!review.is_approved && (
-                          <>
-                            <Button
-                              onClick={() => approveReview(review.id)}
-                              size="sm"
-                              className="bg-green-600 hover:bg-green-700"
-                            >
-                              <CheckCircle className="h-4 w-4 mr-1" />
-                              Approve
-                            </Button>
-                            <Button
-                              onClick={() => rejectReview(review.id)}
-                              size="sm"
-                              variant="outline"
-                              className="border-red-200 text-red-600 hover:bg-red-50"
-                            >
-                              <XCircle className="h-4 w-4 mr-1" />
-                              Reject
-                            </Button>
-                          </>
-                        )}
+                      {/* Delete button for reviews */}
+                      <div className="ml-4">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="border-red-200 text-red-600 hover:bg-red-50"
+                          onClick={() => handleDeleteReview(review.id)}
+                        >
+                          <Trash2 className="h-4 w-4 mr-1" />
+                          Delete
+                        </Button>
                       </div>
                     </div>
                   </CardContent>
