@@ -189,6 +189,17 @@ export default function ReviewForm() {
               </>
             )}
           </Button>
+          <div>
+            <a
+            href="https://search.google.com/local/writereview?placeid=ChIJSaS4hHW35zsRQigVcYFuWk0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+          >
+            Leave Us a Review on Google
+          </a>
+          </div>
+          
         </form>
       </CardContent>
     </Card>
