@@ -25,7 +25,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import ReviewForm from "@/components/ReviewForm";
 import { supabase } from "@/components/SupabaseClient";
 import ReviewList from "@/components/ReviewList";
-import ElfsightWidget from "../components/ElfsightWidget";
 
 // Custom hook for intersection observer
 const useIntersectionObserver = (options = {}) => {
