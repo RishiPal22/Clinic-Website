@@ -1,9 +1,24 @@
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import SignOut from '@/pages/SignOut';
+import { supabase } from './SupabaseClient';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState(null); 
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user);
+    });
+    const { data: {subscription} } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user || null);
+    });
+    return () => {
+      subscription?.unsubscribe();
+    };
+  },[])
 
   const navLinkClass = ({ isActive }) =>
     isActive
@@ -36,12 +51,16 @@ export default function Navbar() {
           <NavLink to="/services" className={navLinkClass}>Services</NavLink>
           <NavLink to="/appointment" className={navLinkClass}>Appointment</NavLink>
           <NavLink to="/Blog" className={navLinkClass}>Blogs</NavLink>
-          <NavLink
-            to="/signup"
-            className="bg-yellow-400 text-blue-900 px-4 py-1.5 rounded-full hover:bg-yellow-300 transition font-bold"
-          >
-            Sign Up
-          </NavLink>
+          {user ? (
+            <SignOut />
+          ) : (
+            <NavLink
+              to="/signup"
+              className="bg-yellow-400 text-blue-900 px-4 py-1.5 rounded-full hover:bg-yellow-300 transition font-bold"
+            >
+              Sign Up
+            </NavLink>
+          )}
         </div>
 
         {/* Hamburger Icon (Mobile) */}
@@ -69,13 +88,17 @@ export default function Navbar() {
           <NavLink to="/services" className={navLinkClass} onClick={() => setIsOpen(false)}>Services</NavLink>
           <NavLink to="/appointment" className={navLinkClass} onClick={() => setIsOpen(false)}>Appointment</NavLink>
           <NavLink to="/Blog" className={navLinkClass} onClick={() => setIsOpen(false)}>Blogs</NavLink>
-          <NavLink
-            to="/signup"
-            className="block bg-yellow-400 text-blue-900 px-4 py-2 rounded-full hover:bg-yellow-300 font-bold text-center transition"
-            onClick={() => setIsOpen(false)}
-          >
-            Sign Up
-          </NavLink>
+          {user ? (
+            <SignOut mobile onClick={() => setIsOpen(false)} />
+          ) : (
+            <NavLink
+              to="/signup"
+              className="block bg-yellow-400 text-blue-900 px-4 py-2 rounded-full hover:bg-yellow-300 font-bold text-center transition"
+              onClick={() => setIsOpen(false)}
+            >
+              Sign Up
+            </NavLink>
+          )}
         </div>
       </div>
     </nav>
