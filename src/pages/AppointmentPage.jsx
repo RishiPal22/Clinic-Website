@@ -34,6 +34,7 @@ export default function AppointmentPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null) // 'success', 'error', or null
+  const showUnderDevelopment = true;
 
   const services = [
     {
@@ -118,7 +119,7 @@ export default function AppointmentPage() {
     setSubmitStatus(null)
 
     try {
-      const { data, error } = await supabase.from("appointments").insert([
+      const { error } = await supabase.from("appointments").insert([
         {
           full_name: formData.fullName,
           email: formData.email,
@@ -167,6 +168,31 @@ export default function AppointmentPage() {
   const maxDateString = maxDate.toISOString().split("T")[0]
 
   return (
+        <>  
+      {showUnderDevelopment && (
+      <div
+        style={{
+          position: "fixed",
+          zIndex: 9999,
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          background: "#fff",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <h1 style={{ fontSize: "2.5rem", color: "#1e293b", marginBottom: "1rem" }}>
+          Appointment Page Under Development
+        </h1>
+        <p style={{ fontSize: "1.2rem", color: "#64748b" }}>
+          We're working hard to bring you this feature. Please check back soon!
+        </p>
+      </div>
+    )}
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -511,5 +537,6 @@ export default function AppointmentPage() {
         </div>
       </div>
     </div>
+    </>
   )
 }
