@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "./ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { Input } from "./ui/input"
@@ -9,6 +9,7 @@ import { Star, Send, CheckCircle, AlertCircle } from "lucide-react"
 import { supabase } from "./SupabaseClient"
 
 export default function ReviewForm() {
+  const [showModal, setShowModal] = useState(false)
   const [rating, setRating] = useState(0)
   const [hoveredRating, setHoveredRating] = useState(0)
   const [formData, setFormData] = useState({
@@ -18,6 +19,22 @@ export default function ReviewForm() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null) // 'success', 'error', or null
+
+  useEffect(() => {
+    // Check auth state on mount
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) setShowModal(true)
+    }
+    getUser()
+    // Listen for auth changes
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setShowModal(!session?.user)
+    })
+    return () => {
+      listener?.subscription.unsubscribe()
+    }
+  }, [])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -69,6 +86,28 @@ export default function ReviewForm() {
   }
 
   return (
+    <>
+    {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl shadow-xl p-8 max-w-sm w-full text-center">
+            <h2 className="text-2xl font-bold mb-4 text-gray-900">Sign Up or Log In</h2>
+            <p className="mb-6 text-gray-700">You need to be logged in to submit a review.</p>
+            <a
+              href="/signup"
+              className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition mb-2"
+            >
+              Sign Up
+            </a>
+            <br />
+            <a
+              href="/signin"
+              className="inline-block text-blue-600 font-semibold hover:underline"
+            >
+              Already have an account? Log In
+            </a>
+          </div>
+        </div>
+      )}
     <Card className="shadow-xl border-0">
       <CardHeader className="text-center space-y-4 pb-8">
         <CardTitle className="text-3xl font-bold text-gray-900">Share Your Experience</CardTitle>
@@ -203,5 +242,6 @@ export default function ReviewForm() {
         </form>
       </CardContent>
     </Card>
+    </>
   )
 }
