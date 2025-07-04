@@ -29,6 +29,8 @@ import Footer from "./components/Footer"
 import ProtectedRoute from "./components/ProtectedRoute"
 
 import "./App.css"
+import ForgotPasswordPage from "./pages/ForgotPassword"
+import ResetPasswordPage from "./pages/ResetPassword"
 
 function App() {
   const [session, setSession] = useState(null)
@@ -203,6 +205,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
+        <Route path="/resetpassword" element={<ResetPasswordPage />} />
 
         <Route
           path="/admin/blog/edit/:id"
