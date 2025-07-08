@@ -2,20 +2,20 @@ const AboutPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
+      <div className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white py-12">
         <div className="absolute inset-0 bg-black opacity-10"></div>
         <div className="relative max-w-6xl mx-auto px-6 text-center">
-          <h1 className="text-5xl font-bold mb-4">About Us</h1>
-          <p className="text-xl opacity-90 max-w-2xl mx-auto">
+          <h1 className="text-4xl lg:text-5xl font-bold mb-3">About Us</h1>
+          <p className="text-lg lg:text-xl opacity-90 max-w-2xl mx-auto">
             Transforming lives through comprehensive diabetes care and holistic wellness
           </p>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-6 py-16">
+      <div className="max-w-6xl mx-auto px-6 py-12">
         {/* Our Story Section */}
-        <div className="mb-20">
+        <div className="mb-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl font-bold text-gray-800 mb-6">Our Story</h2>
@@ -47,7 +47,7 @@ const AboutPage = () => {
         </div>
 
         {/* Doctor Profile Section */}
-        <div className="mb-20">
+        <div className="mb-16">
           <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12">
             <div className="grid lg:grid-cols-3 gap-8 items-center">
               <div className="lg:col-span-1">
@@ -93,7 +93,7 @@ const AboutPage = () => {
         </div>
 
         {/* Philosophy Section */}
-        <div className="mb-16">
+        <div className="mb-12">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Philosophy</h2>
             <div className="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
@@ -107,7 +107,7 @@ const AboutPage = () => {
                 <svg className="w-16 h-16 mx-auto mb-6 opacity-80" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
                 </svg>
-                <p className="text-xl leading-relaxed">
+                <p className="text-lg lg:text-xl leading-relaxed">
                   We understand that diabetes affects every aspect of your life. That's why our approach is
                   comprehensive, addressing not just your blood sugar levels but your entire lifestyle. Our goal is to
                   help you achieve lasting health and wellness.

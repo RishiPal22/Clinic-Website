@@ -256,7 +256,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 z-10">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-20 lg:pt-10 lg:pb-28 z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div
               className={`space-y-8 transition-all duration-1000 ${
@@ -742,6 +742,7 @@ export default function HomePage() {
                 : "translate-y-10 opacity-0"
             }`}
           >
+            
             <ReviewList />
           </div>
         </div>
