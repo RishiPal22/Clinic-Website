@@ -25,6 +25,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import ReviewForm from "@/components/ReviewForm";
 import { supabase } from "@/components/SupabaseClient";
 import ReviewList from "@/components/ReviewList";
+import { useNavigate } from "react-router-dom";
+
 
 // Custom hook for intersection observer
 const useIntersectionObserver = (options = {}) => {
@@ -58,6 +60,8 @@ export default function HomePage() {
     averageRating: 4.9,
     totalReviews: 0,
   });
+    const navigate = useNavigate();
+
   const [blogs, setBlogs] = useState([]);
   const [isLoadingBlogs, setIsLoadingBlogs] = useState(true);
   const [animatedStats, setAnimatedStats] = useState({
@@ -548,7 +552,7 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Diabetes Treatment */}
-            <Card
+            <Card onClick={() => navigate('/services?service=diabetes')}
               className={`group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border-0 shadow-lg bg-gradient-to-br from-white to-blue-50/50 hover:from-blue-50 hover:to-blue-100/50 ${
                 servicesInView
                   ? "translate-y-0 opacity-100"
@@ -593,7 +597,7 @@ export default function HomePage() {
             </Card>
 
             {/* Cancer Treatment */}
-            <Card
+            <Card onClick={() => navigate('/services?section=cancer')}
               className={`group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border-0 shadow-lg bg-gradient-to-br from-white to-purple-50/50 hover:from-purple-50 hover:to-purple-100/50 ${
                 servicesInView
                   ? "translate-y-0 opacity-100"
@@ -639,7 +643,7 @@ export default function HomePage() {
             </Card>
 
             {/* Counseling Services */}
-            <Card
+            <Card onClick={() => navigate('/services?section=counselling')}
               className={`group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border-0 shadow-lg bg-gradient-to-br from-white to-green-50/50 hover:from-green-50 hover:to-green-100/50 ${
                 servicesInView
                   ? "translate-y-0 opacity-100"

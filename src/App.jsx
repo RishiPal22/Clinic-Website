@@ -3,6 +3,8 @@
 import { Routes, Route, Navigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { supabase } from "./components/SupabaseClient"
+import ScrollToTop from "./components/ScrollToTop";
+
 
 // Import all your pages
 import HomePage from "./pages/HomePage"
@@ -63,6 +65,7 @@ function App() {
 
   return (
     <div className="App">
+       <ScrollToTop />
       <Routes>
         {/* Public Routes with Navbar and Footer */}
         <Route
