@@ -323,7 +323,7 @@ export default function HomePage() {
                   variant="outline"
                   size="lg"
                   className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 group"
-                  onClick={() => (window.location.href = "tel:+919876543210")}
+                  onClick={() => (window.location.href = "tel:+919987127646")}
                 >
                   <Phone className="mr-2 h-5 w-5 group-hover:animate-pulse" />
                   Call Now
@@ -379,7 +379,7 @@ export default function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-transparent rounded-3xl transform rotate-3"></div>
               <div className="absolute inset-0 bg-gradient-to-l from-purple-600/20 to-transparent rounded-3xl transform -rotate-3"></div>
               <img
-                src="/clinic.webp"
+                src="/clinic.png"
                 alt="Modern medical facility"
                 className="relative rounded-3xl shadow-2xl object-cover w-full h-[600px] transform hover:scale-105 transition-transform duration-700 hover:rotate-1"
               />
@@ -464,7 +464,7 @@ export default function HomePage() {
                   <span className="font-bold text-blue-600">20 years</span> of
                   experience, Dr. Sanjay Pal is a highly respected physician
                   specializing in Diabetes management, Cancer treatment
-                  strategies, and Mental Health Counseling.
+                  strategies, and General Counseling.
                 </p>
 
                 <p className="text-lg text-gray-700 leading-relaxed">
@@ -1021,7 +1021,7 @@ export default function HomePage() {
                 </div>
                 <div className="text-left">
                   <div className="font-semibold text-lg">Call Us</div>
-                  <div className="text-blue-200">+91 98765 43210</div>
+                  <div className="text-blue-200">+91 9987127646</div>
                 </div>
               </div>
 
@@ -1041,7 +1041,7 @@ export default function HomePage() {
                 </div>
                 <div className="text-left">
                   <div className="font-semibold text-lg">Visit Us</div>
-                  <div className="text-blue-200">123 Health Street</div>
+                  <div className="text-blue-200">7/8, Samruddhi Shopping Centre, Kandivali Village, M.G Road, Kandivali (W), Mumai 400 067, Landmark :Near Nirmal College</div>
                 </div>
               </div>
             </div>

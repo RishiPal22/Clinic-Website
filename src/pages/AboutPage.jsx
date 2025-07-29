@@ -7,7 +7,8 @@ const AboutPage = () => {
         <div className="relative max-w-6xl mx-auto px-6 text-center">
           <h1 className="text-4xl lg:text-5xl font-bold mb-3">About Us</h1>
           <p className="text-lg lg:text-xl opacity-90 max-w-2xl mx-auto">
-            Transforming lives through comprehensive diabetes care and holistic wellness
+            Transforming lives through comprehensive diabetes care and holistic
+            wellness
           </p>
         </div>
       </div>
@@ -18,19 +19,29 @@ const AboutPage = () => {
         <div className="mb-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-gray-800 mb-6">Our Story</h2>
+              <h2 className="text-4xl font-bold text-gray-800 mb-6">
+                Our Story
+              </h2>
               <div className="w-20 h-1 bg-blue-600 mb-6"></div>
               <p className="text-lg text-gray-700 leading-relaxed">
-                At <span className="font-semibold text-blue-600">Raj Clinic</span>, we believe in treating diabetes from
-                all angles. Founded by Dr. Sanjay R Pal, with{" "}
-                <span className="font-semibold">18 years of experience</span>, our practice is dedicated to reversing
-                diabetes and improving overall well-being through a holistic approach.
+                At{" "}
+                <span className="font-semibold text-blue-600">Raj Clinic</span>,
+                we believe in treating diabetes from all angles. Founded by Dr.
+                Sanjay R Pal, with{" "}
+                <span className="font-semibold">18 years of experience</span>,
+                our practice is dedicated to reversing diabetes and improving
+                overall well-being through a holistic approach.
               </p>
             </div>
             <div className="bg-gradient-to-br from-blue-100 to-blue-50 p-8 rounded-2xl shadow-lg">
               <div className="text-center">
                 <div className="w-24 h-24 bg-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="w-12 h-12 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -39,7 +50,9 @@ const AboutPage = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">18+ Years</h3>
+                <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                  18+ Years
+                </h3>
                 <p className="text-gray-600">of Excellence in Healthcare</p>
               </div>
             </div>
@@ -53,14 +66,14 @@ const AboutPage = () => {
               <div className="lg:col-span-1">
                 <div className="relative">
                   <div className="w-64 h-64 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full mx-auto flex items-center justify-center shadow-2xl">
-                    <svg className="w-32 h-32 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    <div className="w-64 h-64 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full mx-auto flex items-center justify-center shadow-2xl">
+                      {/* Replace SVG with doctor's photo */}
+                      <img
+                        src="doctor.webp" // <-- update path as needed
+                        alt="Dr. Sanjay R Pal"
+                        className="w-48 h-48 object-cover rounded-full border-4 border-white shadow-lg"
                       />
-                    </svg>
+                    </div>
                   </div>
                   <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
                     <div className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
@@ -70,20 +83,28 @@ const AboutPage = () => {
                 </div>
               </div>
               <div className="lg:col-span-2">
-                <h2 className="text-4xl font-bold text-gray-800 mb-4">Dr. Sanjay R Pal</h2>
+                <h2 className="text-4xl font-bold text-gray-800 mb-4">
+                  Dr. Sanjay R Pal
+                </h2>
                 <div className="w-20 h-1 bg-blue-600 mb-6"></div>
                 <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                  Dr. Sanjay R Pal is a renowned doctor who has been transforming lives with a unique, patient-centered
-                  approach to diabetes management. By integrating traditional medical practices with lifestyle
-                  modifications, Dr. Sanjay R Pal has achieved a remarkable success rate in diabetes reversal.
+                  Dr. Sanjay R Pal is a renowned doctor who has been
+                  transforming lives with a unique, patient-centered approach to
+                  diabetes management. By integrating traditional medical
+                  practices with lifestyle modifications, Dr. Sanjay R Pal has
+                  achieved a remarkable success rate in diabetes reversal.
                 </p>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-blue-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-blue-800 mb-1">Specialization</h4>
+                    <h4 className="font-semibold text-blue-800 mb-1">
+                      Specialization
+                    </h4>
                     <p className="text-gray-600 text-sm">Diabetes Reversal</p>
                   </div>
                   <div className="bg-blue-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-blue-800 mb-1">Experience</h4>
+                    <h4 className="font-semibold text-blue-800 mb-1">
+                      Experience
+                    </h4>
                     <p className="text-gray-600 text-sm">18+ Years</p>
                   </div>
                 </div>
@@ -95,7 +116,9 @@ const AboutPage = () => {
         {/* Philosophy Section */}
         <div className="mb-12">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Philosophy</h2>
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+              Our Philosophy
+            </h2>
             <div className="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
           </div>
 
@@ -104,13 +127,18 @@ const AboutPage = () => {
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-white opacity-5 rounded-full transform -translate-x-24 translate-y-24"></div>
             <div className="relative z-10">
               <div className="max-w-4xl mx-auto text-center">
-                <svg className="w-16 h-16 mx-auto mb-6 opacity-80" fill="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-16 h-16 mx-auto mb-6 opacity-80"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
                 </svg>
                 <p className="text-lg lg:text-xl leading-relaxed">
-                  We understand that diabetes affects every aspect of your life. That's why our approach is
-                  comprehensive, addressing not just your blood sugar levels but your entire lifestyle. Our goal is to
-                  help you achieve lasting health and wellness.
+                  We understand that diabetes affects every aspect of your life.
+                  That's why our approach is comprehensive, addressing not just
+                  your blood sugar levels but your entire lifestyle. Our goal is
+                  to help you achieve lasting health and wellness.
                 </p>
               </div>
             </div>
@@ -121,7 +149,12 @@ const AboutPage = () => {
         <div className="grid md:grid-cols-3 gap-8">
           <div className="text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
             <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-              <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-8 h-8 text-blue-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -130,23 +163,46 @@ const AboutPage = () => {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-2">Holistic Approach</h3>
-            <p className="text-gray-600">Comprehensive care addressing all aspects of diabetes management</p>
+            <h3 className="text-xl font-bold text-gray-800 mb-2">
+              Holistic Approach
+            </h3>
+            <p className="text-gray-600">
+              Comprehensive care addressing all aspects of diabetes management
+            </p>
           </div>
 
           <div className="text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
             <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-              <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              <svg
+                className="w-8 h-8 text-blue-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-2">Proven Results</h3>
-            <p className="text-gray-600">Remarkable success rate in diabetes reversal and management</p>
+            <h3 className="text-xl font-bold text-gray-800 mb-2">
+              Proven Results
+            </h3>
+            <p className="text-gray-600">
+              Remarkable success rate in diabetes reversal and management
+            </p>
           </div>
 
           <div className="text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
             <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-              <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-8 h-8 text-blue-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -155,13 +211,17 @@ const AboutPage = () => {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-2">Patient-Centered</h3>
-            <p className="text-gray-600">Personalized treatment plans tailored to individual needs</p>
+            <h3 className="text-xl font-bold text-gray-800 mb-2">
+              Patient-Centered
+            </h3>
+            <p className="text-gray-600">
+              Personalized treatment plans tailored to individual needs
+            </p>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AboutPage
+export default AboutPage;

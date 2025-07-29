@@ -1,5 +1,4 @@
 "use client"
-
 import { useState } from "react"
 import { supabase } from "../components/SupabaseClient"
 import { useNavigate } from "react-router-dom"
@@ -19,23 +18,19 @@ const SignupPage = () => {
 
   const validateForm = () => {
     const newErrors = {}
-
     if (!form.fullName.trim()) {
       newErrors.fullName = "Full name is required"
     }
-
     if (!form.email.trim()) {
       newErrors.email = "Email is required"
     } else if (!/\S+@\S+\.\S+/.test(form.email)) {
       newErrors.email = "Please enter a valid email"
     }
-
     if (!form.password) {
       newErrors.password = "Password is required"
     } else if (form.password.length < 6) {
       newErrors.password = "Password must be at least 6 characters"
     }
-
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -43,7 +38,6 @@ const SignupPage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target
     setForm({ ...form, [name]: value })
-
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors({ ...errors, [name]: "" })
@@ -51,20 +45,20 @@ const SignupPage = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!validateForm()) return;
-
-    setLoading(true);
-    setErrors({});
-    setSuccess(false); // Explicitly reset success state
+    e.preventDefault()
+    if (!validateForm()) return
+    setLoading(true)
+    setErrors({})
+    setSuccess(false) // Explicitly reset success state
 
     try {
       // First check if user exists
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
       if (user?.email === form.email) {
-        setErrors({ email: "An account with this email already exists" });
-        return;
+        setErrors({ email: "An account with this email already exists" })
+        return
       }
 
       // If not, proceed with signup
@@ -76,27 +70,27 @@ const SignupPage = () => {
             full_name: form.fullName,
           },
         },
-      });
+      })
 
       if (error) {
-        handleSignupError(error);
+        handleSignupError(error)
       } else {
         // Only show success if this was a new user signup
         if (data.user?.identities?.length > 0) {
-          setSuccess(true);
+          setSuccess(true)
         } else {
-          setErrors({ email: "An account with this email already exists" });
+          setErrors({ email: "An account with this email already exists" })
         }
       }
     } catch {
-      setErrors({ submit: "An unexpected error occurred" });
+      setErrors({ submit: "An unexpected error occurred" })
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const handleSignupError = (error) => {
-    console.log("Signup error:", error);
+    console.log("Signup error:", error)
     if (
       error.message?.toLowerCase().includes("user already registered") ||
       error.message?.toLowerCase().includes("user already exists") ||
@@ -105,11 +99,12 @@ const SignupPage = () => {
       error.code === "23505" ||
       error.code === "user_already_exists"
     ) {
-      setErrors({ email: "An account with this email already exists" });
+      setErrors({ email: "An account with this email already exists" })
     } else {
-      setErrors({ submit: error.message });
+      setErrors({ submit: error.message })
     }
-  };
+  }
+
   if (success) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
@@ -156,8 +151,9 @@ const SignupPage = () => {
                   name="fullName"
                   value={form.fullName}
                   onChange={handleChange}
-                  className={`w-full pl-10 pr-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${errors.fullName ? "border-red-500 bg-red-50" : "border-gray-300 hover:border-gray-400"
-                    }`}
+                  className={`w-full pl-10 pr-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                    errors.fullName ? "border-red-500 bg-red-50" : "border-gray-300 hover:border-gray-400"
+                  }`}
                   placeholder="Enter your full name"
                 />
               </div>
@@ -176,8 +172,9 @@ const SignupPage = () => {
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  className={`w-full pl-10 pr-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${errors.email ? "border-red-500 bg-red-50" : "border-gray-300 hover:border-gray-400"
-                    }`}
+                  className={`w-full pl-10 pr-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                    errors.email ? "border-red-500 bg-red-50" : "border-gray-300 hover:border-gray-400"
+                  }`}
                   placeholder="Enter your email"
                 />
               </div>
@@ -196,8 +193,9 @@ const SignupPage = () => {
                   name="password"
                   value={form.password}
                   onChange={handleChange}
-                  className={`w-full pl-10 pr-12 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${errors.password ? "border-red-500 bg-red-50" : "border-gray-300 hover:border-gray-400"
-                    }`}
+                  className={`w-full pl-10 pr-12 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                    errors.password ? "border-red-500 bg-red-50" : "border-gray-300 hover:border-gray-400"
+                  }`}
                   placeholder="Create a password"
                 />
                 <button
@@ -243,7 +241,7 @@ const SignupPage = () => {
           <div className="text-center mb-2">
             <button
               type="button"
-              onClick={() => navigate('/forgotpassword')}
+              onClick={() => navigate("/forgotpassword")}
               className="text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-200"
             >
               Forgot your password?
@@ -263,6 +261,17 @@ const SignupPage = () => {
               </button>
             </p>
           </div>
+        </div>
+
+        {/* Admin Login Button */}
+        <div className="mt-4 text-center">
+          <button
+            type="button"
+            onClick={() => navigate("/admin/login")}
+            className="text-purple-600 font-semibold hover:text-purple-800 transition-colors duration-200"
+          >
+            Admin Login
+          </button>
         </div>
 
         {/* Footer */}

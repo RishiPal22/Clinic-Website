@@ -58,7 +58,7 @@ export default function AppointmentPage() {
     },
     {
       id: "counseling",
-      name: "Mental Health Counseling",
+      name: "Health Counseling",
       icon: Users,
       description: "Psychological support and therapeutic sessions",
       duration: "45-60 minutes",
@@ -247,10 +247,10 @@ export default function AppointmentPage() {
                     <div>
                       <p className="font-medium text-gray-900">Phone</p>
                       <a
-                        href="tel:+919876543210"
+                        href="tel:+91 9920394646"
                         className="text-blue-600 hover:text-blue-800"
                       >
-                        +91 98765 43210
+                        +91 9987127646
                       </a>
                     </div>
                   </div>
@@ -270,12 +270,10 @@ export default function AppointmentPage() {
                     <MapPin className="h-5 w-5 text-blue-600 mt-1" />
                     <div>
                       <p className="font-medium text-gray-900">Address</p>
-                      <p className="text-gray-600 text-sm leading-5">
-                        123 Health Street,
-                        <br />
-                        Medical District,
-                        <br />
-                        City, State 12345
+                      <p className="text-gray-600 text-sm leading-5">Raj Clinic <br />
+                        7/8, Samruddhi Shopping Centre, Kandivali Village , M.G Road, Landmark :Near Nirmal College
+                      <br />
+                      Kandivali (W), Mumai 400 067
                       </p>
                     </div>
                   </div>
@@ -291,17 +289,18 @@ export default function AppointmentPage() {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Mon - Fri</span>
+                    <span className="text-gray-600">Mon - sat</span>
                     <span className="font-medium text-gray-900">
-                      9:00 AM - 6:00 PM
+                      Morning 10:00 AM - 1:00 PM <br />
+                      evening 6:00 PM - 10: PM
                     </span>
                   </div>
-                  <div className="flex justify-between text-sm">
+                  {/* <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Saturday</span>
                     <span className="font-medium text-gray-900">
                       9:00 AM - 2:00 PM
                     </span>
-                  </div>
+                  </div> */}
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Sunday</span>
                     <span className="font-medium text-red-600">
@@ -311,7 +310,7 @@ export default function AppointmentPage() {
                   <div className="mt-4 p-3 bg-blue-50 rounded-lg">
                     <p className="text-sm text-blue-800 leading-5">
                       <strong>Emergency:</strong> For urgent medical needs, call
-                      us 24/7 or visit the nearest emergency room.
+                      us 24/7 on phone no: 9920394646
                     </p>
                   </div>
                 </CardContent>

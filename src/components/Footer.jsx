@@ -51,7 +51,7 @@ export default function Footer() {
               </div>
 
               <p className="text-blue-100 leading-relaxed max-w-md text-sm">
-                Providing comprehensive healthcare services in Diabetes management, Cancer treatment, and Mental Health
+                Providing comprehensive healthcare services in Diabetes management, Cancer treatment, and Health
                 counseling with compassionate care and cutting-edge medical expertise.
               </p>
 
@@ -81,7 +81,7 @@ export default function Footer() {
                   { name: "Our Services", href: "/services" },
                   { name: "Book Appointment", href: "/appointment" },
                   { name: "Health Blog", href: "/blog" },
-                  { name: "Patient Reviews", href: "/reviews" },
+                  // { name: "Patient Reviews", href: "/reviews" },
                 ].map((link, index) => (
                   <a
                     key={index}
@@ -107,7 +107,7 @@ export default function Footer() {
                   </div>
                   <div>
                     <p className="font-semibold text-white text-sm">Phone</p>
-                    <p className="text-blue-200 text-xs">+91 98765 43210</p>
+                    <p className="text-blue-200 text-xs">+91 9987127646</p>
                   </div>
                 </div>
 
@@ -128,9 +128,9 @@ export default function Footer() {
                   <div>
                     <p className="font-semibold text-white text-sm">Address</p>
                     <p className="text-blue-200 text-xs">
-                      123 Health Street
+                      7/8, Samruddhi Shopping Centre, M.G Road, Landmark :Near Nirmal College
                       <br />
-                      Medical District, City 12345
+                      Kandivali (W), Mumai 400 067
                     </p>
                   </div>
                 </div>
@@ -142,7 +142,11 @@ export default function Footer() {
                   <div>
                     <p className="font-semibold text-white text-sm">Hours</p>
                     <p className="text-blue-200 text-xs">
-                      Mon-Sat: 9AM-6PM
+                      Morning 10AM-1PM
+                      <br />
+                      evening 6:00pm-10:pm
+                      <br />
+                      Sunday closed
                       <br />
                       Emergency: 24/7
                     </p>
