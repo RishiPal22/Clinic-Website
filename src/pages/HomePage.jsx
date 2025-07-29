@@ -60,7 +60,7 @@ export default function HomePage() {
     averageRating: 4.9,
     totalReviews: 0,
   });
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [blogs, setBlogs] = useState([]);
   const [isLoadingBlogs, setIsLoadingBlogs] = useState(true);
@@ -263,11 +263,10 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-20 lg:pt-10 lg:pb-28 z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div
-              className={`space-y-8 transition-all duration-1000 ${
-                heroInView
+              className={`space-y-8 transition-all duration-1000 ${heroInView
                   ? "translate-x-0 opacity-100"
                   : "-translate-x-10 opacity-0"
-              }`}
+                }`}
             >
               <div className="space-y-6">
                 <div className="flex items-center space-x-3 text-blue-200 group">
@@ -312,8 +311,7 @@ export default function HomePage() {
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-blue-900 font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 group"
-                  onClick={() => (window.location.href = "/appointment")}
-                >
+                  onClick={() => navigate("/appointment")}                >
                   <Calendar className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
                   Book an Appointment
                   <div className="absolute inset-0 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping"></div>
@@ -370,11 +368,10 @@ export default function HomePage() {
             </div>
 
             <div
-              className={`relative lg:block hidden transition-all duration-1000 delay-300 ${
-                heroInView
+              className={`relative transition-all duration-1000 delay-300 ${heroInView
                   ? "translate-x-0 opacity-100"
                   : "translate-x-10 opacity-0"
-              }`}
+                }`}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-transparent rounded-3xl transform rotate-3"></div>
               <div className="absolute inset-0 bg-gradient-to-l from-purple-600/20 to-transparent rounded-3xl transform -rotate-3"></div>
@@ -407,11 +404,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div
-              className={`relative transition-all duration-1000 ${
-                doctorInView
+              className={`relative transition-all duration-1000 ${doctorInView
                   ? "translate-x-0 opacity-100"
                   : "-translate-x-10 opacity-0"
-              }`}
+                }`}
             >
               <div className="absolute -inset-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl opacity-10 blur-xl"></div>
               <div className="relative group">
@@ -439,11 +435,10 @@ export default function HomePage() {
             </div>
 
             <div
-              className={`space-y-8 transition-all duration-1000 delay-300 ${
-                doctorInView
+              className={`space-y-8 transition-all duration-1000 delay-300 ${doctorInView
                   ? "translate-x-0 opacity-100"
                   : "translate-x-10 opacity-0"
-              }`}
+                }`}
             >
               <div className="space-y-6">
                 <div className="flex items-center space-x-3 text-blue-600 group">
@@ -524,11 +519,10 @@ export default function HomePage() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
-            className={`text-center space-y-6 mb-20 transition-all duration-1000 ${
-              servicesInView
+            className={`text-center space-y-6 mb-20 transition-all duration-1000 ${servicesInView
                 ? "translate-y-0 opacity-100"
                 : "translate-y-10 opacity-0"
-            }`}
+              }`}
           >
             <div className="flex items-center justify-center space-x-3 text-blue-600 group">
               <div className="p-2 bg-blue-100 rounded-full group-hover:bg-blue-200 transition-colors duration-300">
@@ -553,11 +547,10 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-8">
             {/* Diabetes Treatment */}
             <Card onClick={() => navigate('/services?service=diabetes')}
-              className={`group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border-0 shadow-lg bg-gradient-to-br from-white to-blue-50/50 hover:from-blue-50 hover:to-blue-100/50 ${
-                servicesInView
+              className={`group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border-0 shadow-lg bg-gradient-to-br from-white to-blue-50/50 hover:from-blue-50 hover:to-blue-100/50 ${servicesInView
                   ? "translate-y-0 opacity-100"
                   : "translate-y-10 opacity-0"
-              }`}
+                }`}
             >
               <CardContent className="p-8 space-y-6 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-200/20 to-transparent rounded-full transform translate-x-16 -translate-y-16"></div>
@@ -598,11 +591,10 @@ export default function HomePage() {
 
             {/* Cancer Treatment */}
             <Card onClick={() => navigate('/services?section=cancer')}
-              className={`group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border-0 shadow-lg bg-gradient-to-br from-white to-purple-50/50 hover:from-purple-50 hover:to-purple-100/50 ${
-                servicesInView
+              className={`group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border-0 shadow-lg bg-gradient-to-br from-white to-purple-50/50 hover:from-purple-50 hover:to-purple-100/50 ${servicesInView
                   ? "translate-y-0 opacity-100"
                   : "translate-y-10 opacity-0"
-              }`}
+                }`}
               style={{ animationDelay: "200ms" }}
             >
               <CardContent className="p-8 space-y-6 relative overflow-hidden">
@@ -644,11 +636,10 @@ export default function HomePage() {
 
             {/* Counseling Services */}
             <Card onClick={() => navigate('/services?section=counselling')}
-              className={`group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border-0 shadow-lg bg-gradient-to-br from-white to-green-50/50 hover:from-green-50 hover:to-green-100/50 ${
-                servicesInView
+              className={`group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border-0 shadow-lg bg-gradient-to-br from-white to-green-50/50 hover:from-green-50 hover:to-green-100/50 ${servicesInView
                   ? "translate-y-0 opacity-100"
                   : "translate-y-10 opacity-0"
-              }`}
+                }`}
               style={{ animationDelay: "400ms" }}
             >
               <CardContent className="p-8 space-y-6 relative overflow-hidden">
@@ -698,11 +689,10 @@ export default function HomePage() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
-            className={`text-center space-y-6 mb-20 transition-all duration-1000 ${
-              reviewsInView
+            className={`text-center space-y-6 mb-20 transition-all duration-1000 ${reviewsInView
                 ? "translate-y-0 opacity-100"
                 : "translate-y-10 opacity-0"
-            }`}
+              }`}
           >
             <div className="flex items-center justify-center space-x-3 text-blue-600 group">
               <div className="p-2 bg-blue-100 rounded-full group-hover:bg-blue-200 transition-colors duration-300">
@@ -740,13 +730,12 @@ export default function HomePage() {
           </div>
 
           <div
-            className={`transition-all duration-1000 delay-300 ${
-              reviewsInView
+            className={`transition-all duration-1000 delay-300 ${reviewsInView
                 ? "translate-y-0 opacity-100"
                 : "translate-y-10 opacity-0"
-            }`}
+              }`}
           >
-            
+
             <ReviewList />
           </div>
         </div>
@@ -759,11 +748,10 @@ export default function HomePage() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
-            className={`text-center space-y-6 mb-20 transition-all duration-1000 ${
-              blogInView
+            className={`text-center space-y-6 mb-20 transition-all duration-1000 ${blogInView
                 ? "translate-y-0 opacity-100"
                 : "translate-y-10 opacity-0"
-            }`}
+              }`}
           >
             <div className="flex items-center justify-center space-x-3 text-blue-600 group">
               <div className="p-2 bg-blue-100 rounded-full group-hover:bg-blue-200 transition-colors duration-300">
@@ -806,15 +794,13 @@ export default function HomePage() {
               {blogs.slice(0, 5).map((blog, index) => (
                 <Card
                   key={blog.id}
-                  className={`group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-4 border-0 bg-gradient-to-br from-white to-gray-50/50 hover:from-gray-50 hover:to-gray-100/50 ${
-                    index === 0
+                  className={`group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-4 border-0 bg-gradient-to-br from-white to-gray-50/50 hover:from-gray-50 hover:to-gray-100/50 ${index === 0
                       ? "md:col-span-2 lg:col-span-2 xl:col-span-2"
                       : ""
-                  } ${
-                    blogInView
+                    } ${blogInView
                       ? "translate-y-0 opacity-100"
                       : "translate-y-10 opacity-0"
-                  }`}
+                    }`}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className="relative overflow-hidden">
@@ -824,9 +810,8 @@ export default function HomePage() {
                         "/placeholder.svg?height=300&width=400"
                       }
                       alt={blog.title}
-                      className={`w-full object-cover group-hover:scale-110 transition-transform duration-700 ${
-                        index === 0 ? "h-64" : "h-48"
-                      }`}
+                      className={`w-full object-cover group-hover:scale-110 transition-transform duration-700 ${index === 0 ? "h-64" : "h-48"
+                        }`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
@@ -860,9 +845,8 @@ export default function HomePage() {
                   </div>
 
                   <CardContent
-                    className={`space-y-4 ${
-                      index === 0 ? "p-8" : "p-6"
-                    } relative`}
+                    className={`space-y-4 ${index === 0 ? "p-8" : "p-6"
+                      } relative`}
                   >
                     {/* Meta Information */}
                     <div className="flex items-center justify-between text-sm text-gray-500">
@@ -889,18 +873,16 @@ export default function HomePage() {
 
                     {/* Title */}
                     <h3
-                      className={`font-bold text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300 ${
-                        index === 0 ? "text-2xl" : "text-xl"
-                      }`}
+                      className={`font-bold text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300 ${index === 0 ? "text-2xl" : "text-xl"
+                        }`}
                     >
                       {blog.title}
                     </h3>
 
                     {/* Excerpt */}
                     <p
-                      className={`text-gray-600 leading-relaxed ${
-                        index === 0 ? "line-clamp-4 text-lg" : "line-clamp-3"
-                      }`}
+                      className={`text-gray-600 leading-relaxed ${index === 0 ? "line-clamp-4 text-lg" : "line-clamp-3"
+                        }`}
                     >
                       {blog.excerpt}
                     </p>
@@ -909,9 +891,9 @@ export default function HomePage() {
                     <div className="pt-4">
                       <Button
                         onClick={() =>
-                          (window.location.href = `/blog/${createSlug(
-                            blog.title
-                          )}-${blog.id}`)
+                        (window.location.href = `/blog/${createSlug(
+                          blog.title
+                        )}-${blog.id}`)
                         }
                         variant="ghost"
                         className="group/btn p-0 h-auto font-semibold text-blue-600 hover:text-blue-700 hover:bg-transparent transition-all duration-300"
@@ -972,11 +954,10 @@ export default function HomePage() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
           <div
-            className={`space-y-10 transition-all duration-1000 ${
-              ctaInView
+            className={`space-y-10 transition-all duration-1000 ${ctaInView
                 ? "translate-y-0 opacity-100"
                 : "translate-y-10 opacity-0"
-            }`}
+              }`}
           >
             <div className="space-y-6">
               <h2 className="text-4xl lg:text-6xl font-bold leading-tight">
@@ -996,7 +977,7 @@ export default function HomePage() {
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-blue-900 font-semibold px-10 py-5 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 group relative overflow-hidden"
-                onClick={() => (window.location.href = "/appointment")}
+                onClick={() => navigate("/appointment")}
               >
                 <div className="absolute inset-0 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping"></div>
                 <Calendar className="mr-3 h-6 w-6 group-hover:rotate-12 transition-transform duration-300" />
@@ -1055,7 +1036,7 @@ export default function HomePage() {
           <div className="transform hover:scale-105 transition-transform duration-500">
             <ReviewForm />
           </div>
-          
+
         </div>
       </section>
     </div>
