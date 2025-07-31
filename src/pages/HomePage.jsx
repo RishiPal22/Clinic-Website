@@ -55,6 +55,8 @@ const useIntersectionObserver = (options = {}) => {
 
 export default function HomePage() {
   const [approvedReviews, setApprovedReviews] = useState([]);
+  // const [viewReview, setViewReview] = useState(null);
+
   const [stats, setStats] = useState({
     totalPatients: 500,
     averageRating: 4.9,
@@ -264,8 +266,8 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div
               className={`space-y-8 transition-all duration-1000 ${heroInView
-                  ? "translate-x-0 opacity-100"
-                  : "-translate-x-10 opacity-0"
+                ? "translate-x-0 opacity-100"
+                : "-translate-x-10 opacity-0"
                 }`}
             >
               <div className="space-y-6">
@@ -369,8 +371,8 @@ export default function HomePage() {
 
             <div
               className={`relative transition-all duration-1000 delay-300 ${heroInView
-                  ? "translate-x-0 opacity-100"
-                  : "translate-x-10 opacity-0"
+                ? "translate-x-0 opacity-100"
+                : "translate-x-10 opacity-0"
                 }`}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-transparent rounded-3xl transform rotate-3"></div>
@@ -405,8 +407,8 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div
               className={`relative transition-all duration-1000 ${doctorInView
-                  ? "translate-x-0 opacity-100"
-                  : "-translate-x-10 opacity-0"
+                ? "translate-x-0 opacity-100"
+                : "-translate-x-10 opacity-0"
                 }`}
             >
               <div className="absolute -inset-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl opacity-10 blur-xl"></div>
@@ -436,8 +438,8 @@ export default function HomePage() {
 
             <div
               className={`space-y-8 transition-all duration-1000 delay-300 ${doctorInView
-                  ? "translate-x-0 opacity-100"
-                  : "translate-x-10 opacity-0"
+                ? "translate-x-0 opacity-100"
+                : "translate-x-10 opacity-0"
                 }`}
             >
               <div className="space-y-6">
@@ -520,8 +522,8 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className={`text-center space-y-6 mb-20 transition-all duration-1000 ${servicesInView
-                ? "translate-y-0 opacity-100"
-                : "translate-y-10 opacity-0"
+              ? "translate-y-0 opacity-100"
+              : "translate-y-10 opacity-0"
               }`}
           >
             <div className="flex items-center justify-center space-x-3 text-blue-600 group">
@@ -548,8 +550,8 @@ export default function HomePage() {
             {/* Diabetes Treatment */}
             <Card onClick={() => navigate('/services?service=diabetes')}
               className={`group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border-0 shadow-lg bg-gradient-to-br from-white to-blue-50/50 hover:from-blue-50 hover:to-blue-100/50 ${servicesInView
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
                 }`}
             >
               <CardContent className="p-8 space-y-6 relative overflow-hidden">
@@ -592,8 +594,8 @@ export default function HomePage() {
             {/* Cancer Treatment */}
             <Card onClick={() => navigate('/services?section=cancer')}
               className={`group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border-0 shadow-lg bg-gradient-to-br from-white to-purple-50/50 hover:from-purple-50 hover:to-purple-100/50 ${servicesInView
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
                 }`}
               style={{ animationDelay: "200ms" }}
             >
@@ -637,8 +639,8 @@ export default function HomePage() {
             {/* Counseling Services */}
             <Card onClick={() => navigate('/services?section=counselling')}
               className={`group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border-0 shadow-lg bg-gradient-to-br from-white to-green-50/50 hover:from-green-50 hover:to-green-100/50 ${servicesInView
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
                 }`}
               style={{ animationDelay: "400ms" }}
             >
@@ -690,8 +692,8 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className={`text-center space-y-6 mb-20 transition-all duration-1000 ${reviewsInView
-                ? "translate-y-0 opacity-100"
-                : "translate-y-10 opacity-0"
+              ? "translate-y-0 opacity-100"
+              : "translate-y-10 opacity-0"
               }`}
           >
             <div className="flex items-center justify-center space-x-3 text-blue-600 group">
@@ -731,8 +733,8 @@ export default function HomePage() {
 
           <div
             className={`transition-all duration-1000 delay-300 ${reviewsInView
-                ? "translate-y-0 opacity-100"
-                : "translate-y-10 opacity-0"
+              ? "translate-y-0 opacity-100"
+              : "translate-y-10 opacity-0"
               }`}
           >
 
@@ -749,8 +751,8 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className={`text-center space-y-6 mb-20 transition-all duration-1000 ${blogInView
-                ? "translate-y-0 opacity-100"
-                : "translate-y-10 opacity-0"
+              ? "translate-y-0 opacity-100"
+              : "translate-y-10 opacity-0"
               }`}
           >
             <div className="flex items-center justify-center space-x-3 text-blue-600 group">
@@ -795,8 +797,8 @@ export default function HomePage() {
                 <Card
                   key={blog.id}
                   className={`group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-4 border-0 bg-gradient-to-br from-white to-gray-50/50 hover:from-gray-50 hover:to-gray-100/50 ${index === 0
-                      ? "md:col-span-2 lg:col-span-2 xl:col-span-2"
-                      : ""
+                    ? "md:col-span-2 lg:col-span-2 xl:col-span-2"
+                    : ""
                     } ${blogInView
                       ? "translate-y-0 opacity-100"
                       : "translate-y-10 opacity-0"
@@ -955,8 +957,8 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
           <div
             className={`space-y-10 transition-all duration-1000 ${ctaInView
-                ? "translate-y-0 opacity-100"
-                : "translate-y-10 opacity-0"
+              ? "translate-y-0 opacity-100"
+              : "translate-y-10 opacity-0"
               }`}
           >
             <div className="space-y-6">
