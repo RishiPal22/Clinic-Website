@@ -24,7 +24,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import ReviewForm from "@/components/ReviewForm";
 import { supabase } from "@/components/SupabaseClient";
-import ReviewList from "@/components/ReviewList";
+import TestimonialSlider from "@/components/ui/testimonial-slider";
 import { useNavigate } from "react-router-dom";
 
 
@@ -54,7 +54,7 @@ const useIntersectionObserver = (options = {}) => {
 };
 
 export default function HomePage() {
-  const [approvedReviews, setApprovedReviews] = useState([]);
+  // Removed unused approvedReviews state - using ReviewList component instead
   const [stats, setStats] = useState({
     totalPatients: 500,
     averageRating: 4.9,
@@ -131,25 +131,7 @@ export default function HomePage() {
 
   // Fetch data
   useEffect(() => {
-    const fetchApprovedReviews = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("reviews")
-          .select("*")
-          .order("created_at", { ascending: false })
-          .limit(3);
-
-        if (error) {
-          console.error("Error fetching reviews:", error);
-          setApprovedReviews([]);
-        } else {
-          setApprovedReviews(data);
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        setApprovedReviews([]);
-      }
-    };
+    // Removed fetchApprovedReviews - using ReviewList component instead
 
     const fetchStats = async () => {
       try {
@@ -195,7 +177,6 @@ export default function HomePage() {
       }
     };
 
-    fetchApprovedReviews();
     fetchStats();
     fetchBlogs();
   }, []);
@@ -312,7 +293,7 @@ export default function HomePage() {
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-blue-900 font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 group"
-                  onClick={() => (window.location.href = "/appointment")}
+                  onClick={() => navigate("/appointment")}
                 >
                   <Calendar className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
                   Book an Appointment
@@ -323,7 +304,7 @@ export default function HomePage() {
                   variant="outline"
                   size="lg"
                   className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 group"
-                  onClick={() => (window.location.href = "tel:+919987127646")}
+                  onClick={() => window.open("tel:+919987127646", "_self")}
                 >
                   <Phone className="mr-2 h-5 w-5 group-hover:animate-pulse" />
                   Call Now
@@ -746,8 +727,7 @@ export default function HomePage() {
                 : "translate-y-10 opacity-0"
             }`}
           >
-            
-            <ReviewList />
+            <TestimonialSlider />
           </div>
         </div>
       </section>
@@ -909,7 +889,7 @@ export default function HomePage() {
                     <div className="pt-4">
                       <Button
                         onClick={() =>
-                          (window.location.href = `/blog/${createSlug(
+                          navigate(`/blog/${createSlug(
                             blog.title
                           )}-${blog.id}`)
                         }
@@ -944,7 +924,7 @@ export default function HomePage() {
           {blogs.length > 0 && (
             <div className="text-center mt-16">
               <Button
-                onClick={() => (window.location.href = "/blog")}
+                onClick={() => navigate("/blog")}
                 variant="outline"
                 size="lg"
                 className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-full font-semibold transition-all duration-500 group transform hover:scale-105 hover:-translate-y-1 shadow-lg hover:shadow-2xl"
@@ -996,7 +976,7 @@ export default function HomePage() {
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-blue-900 font-semibold px-10 py-5 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 group relative overflow-hidden"
-                onClick={() => (window.location.href = "/appointment")}
+                onClick={() => navigate("/appointment")}
               >
                 <div className="absolute inset-0 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping"></div>
                 <Calendar className="mr-3 h-6 w-6 group-hover:rotate-12 transition-transform duration-300" />

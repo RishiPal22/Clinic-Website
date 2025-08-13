@@ -33,9 +33,10 @@ import ProtectedRoute from "./components/ProtectedRoute"
 import "./App.css"
 import ForgotPasswordPage from "./pages/ForgotPassword"
 import ResetPasswordPage from "./pages/ResetPassword"
+import TestimonialDemo from "./pages/TestimonialDemo"
 
 function App() {
-  const [session, setSession] = useState(null)
+  const [_session, setSession] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -210,6 +211,17 @@ function App() {
         />
         <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
         <Route path="/resetpassword" element={<ResetPasswordPage />} />
+        
+        <Route
+          path="/testimonial-demo"
+          element={
+            <>
+              <Navbar />
+              <TestimonialDemo />
+              <Footer />
+            </>
+          }
+        />
 
         <Route
           path="/admin/blog/edit/:id"

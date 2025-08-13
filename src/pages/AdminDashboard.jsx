@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { Button } from "../components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 import { FileText, Calendar, Star, Plus, Eye, Trash2, LogOut, BarChart3 } from "lucide-react"
@@ -111,7 +111,7 @@ export default function AdminDashboard() {
 
   // Removed approveReview and rejectReview functions
 
-  const StatCard = ({ title, value, icon: Icon, color = "blue" }) => (
+  const StatCard = ({ title, value, icon, color = "blue" }) => (
     <Card className="hover:shadow-lg transition-shadow duration-300">
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
@@ -120,7 +120,7 @@ export default function AdminDashboard() {
             <p className={`text-3xl font-bold text-${color}-600`}>{value}</p>
           </div>
           <div className={`w-12 h-12 bg-${color}-100 rounded-lg flex items-center justify-center`}>
-            <Icon className={`h-6 w-6 text-${color}-600`} />
+            {React.createElement(icon, { className: `h-6 w-6 text-${color}-600` })}
           </div>
         </div>
       </CardContent>

@@ -8,7 +8,7 @@ export class EmailService {
     }
 
     // Option 1: Using Resend (recommended)
-    if (process.env.REACT_APP_RESEND_API_KEY) {
+    if (import.meta.env.VITE_RESEND_API_KEY) {
       return this.sendWithResend(emailData)
     }
 
@@ -148,7 +148,7 @@ export class EmailService {
               confirmation.status === "cancelled"
                 ? `
             <p>If you'd like to reschedule, please contact us or book a new appointment online.</p>
-            <a href="${process.env.REACT_APP_WEBSITE_URL}/appointment" class="button">Book New Appointment</a>
+            <a href="${import.meta.env.VITE_WEBSITE_URL || window.location.origin}/appointment" class="button">Book New Appointment</a>
             `
                 : ""
             }
@@ -177,7 +177,7 @@ export class EmailService {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.REACT_APP_RESEND_API_KEY}`,
+          Authorization: `Bearer ${import.meta.env.VITE_RESEND_API_KEY}`,
         },
         body: JSON.stringify({
           from: "Raj Clinic <appointments@rajclinic.com>",

@@ -35,7 +35,7 @@ export default function AdminLogin() {
       console.log("Attempting login with:", formData.email)
 
       // Step 1: Try to sign in with Supabase Auth
-      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+      const { data: _authData, error: authError } = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password,
       })

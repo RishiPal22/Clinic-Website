@@ -86,7 +86,7 @@ export default function AdminSetup() {
       }
 
       // Step 2: Add user to admin_users table
-      const { data: profileData, error: profileError } = await supabase
+      const { data: _profileData, error: profileError } = await supabase
         .from("admin_users")
         .insert({
           email: formData.email,

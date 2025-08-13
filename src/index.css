@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @layer base {
+@layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -65,4 +65,9 @@
   body {
     @apply bg-background text-foreground;
   }
-} */
+}
+
+/* Testimonial Slider Custom Styles */
+.dark {
+  --muted-foreground: var(--light-100);
+}

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useParams } from "react-router-dom"
 import { Calendar, User, ArrowLeft } from "lucide-react"
 import { supabase } from "../components/SupabaseClient"
@@ -10,13 +10,7 @@ export default function BlogPost() {
   const [blog, setBlog] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    if (slug) {
-      fetchBlog()
-    }
-  }, [slug])
-
-  const fetchBlog = async () => {
+  const fetchBlog = useCallback(async () => {
     try {
       // Extract ID from slug (format: title-slug-id)
       const blogId = slug.split("-").pop()
@@ -38,7 +32,13 @@ export default function BlogPost() {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [slug])
+
+  useEffect(() => {
+    if (slug) {
+      fetchBlog()
+    }
+  }, [slug, fetchBlog])
 
   if (isLoading) {
     return (
