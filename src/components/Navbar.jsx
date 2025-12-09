@@ -22,11 +22,11 @@ export default function Navbar() {
 
   const navLinkClass = ({ isActive }) =>
     isActive
-      ? 'text-yellow-400 border-b-2 border-yellow-400 pb-1'
-      : 'text-white hover:text-yellow-300 transition duration-200';
+      ? 'text-white font-bold border-b-2 border-white pb-1'
+      : 'text-white/80 hover:text-white transition duration-200';
 
   return (
-    <nav className="backdrop-blur-md bg-blue-900/70 text-white shadow-lg sticky top-0 z-50">
+    <nav className="backdrop-blur-md text-white shadow-lg sticky top-0 z-50" style={{ backgroundColor: 'rgba(0, 121, 158, 0.95)' }}>
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
         {/* Logo + Brand */}
@@ -38,7 +38,7 @@ export default function Navbar() {
           />
           <NavLink
             to="/"
-            className="font-extrabold text-2xl tracking-wide bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent"
+            className="font-extrabold text-2xl tracking-wide bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent"
           >
             Raj Clinic
           </NavLink>
@@ -56,7 +56,12 @@ export default function Navbar() {
           ) : (
             <NavLink
               to="/signup"
-              className="bg-yellow-400 text-blue-900 px-4 py-1.5 rounded-full hover:bg-yellow-300 transition font-bold"
+              className="text-white font-bold px-6 py-2 rounded-full transition-all duration-300 transform hover:scale-105"
+              style={{
+                backgroundColor: '#d2084f',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#a00640')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#d2084f')}
             >
               Sign Up
             </NavLink>
@@ -65,13 +70,14 @@ export default function Navbar() {
 
         {/* Hamburger Icon (Mobile) */}
         <button
-          className="md:hidden p-2 rounded-md bg-blue-700/60 hover:bg-blue-600 transition"
+          className="md:hidden p-2 rounded-md transition"
+          style={{ backgroundColor: 'rgba(210, 8, 79, 0.3)' }}
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? (
-            <FaTimes className="w-6 h-6 text-yellow-300" />
+            <FaTimes className="w-6 h-6 text-white" />
           ) : (
-            <FaBars className="w-6 h-6 text-yellow-300" />
+            <FaBars className="w-6 h-6 text-white" />
           )}
         </button>
       </div>
@@ -80,7 +86,8 @@ export default function Navbar() {
       <div
         className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
           isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-        } bg-blue-800/95 backdrop-blur-md px-6 py-4 text-base font-medium rounded-b-xl shadow-md`}
+        } backdrop-blur-md px-6 py-4 text-base font-medium rounded-b-xl shadow-md`}
+        style={{ backgroundColor: 'rgba(1, 90, 125, 0.98)' }}
       >
         <div className="flex flex-col space-y-4">
           <NavLink to="/" className={navLinkClass} onClick={() => setIsOpen(false)}>Home</NavLink>
@@ -93,8 +100,11 @@ export default function Navbar() {
           ) : (
             <NavLink
               to="/signup"
-              className="block bg-yellow-400 text-blue-900 px-4 py-2 rounded-full hover:bg-yellow-300 font-bold text-center transition"
+              className="block text-white px-4 py-2 rounded-full font-bold text-center transition-all duration-300 transform hover:scale-105"
+              style={{ backgroundColor: '#d2084f' }}
               onClick={() => setIsOpen(false)}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#a00640')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#d2084f')}
             >
               Sign Up
             </NavLink>

@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react"
 import {
   Phone,
   Mail,
@@ -19,140 +19,115 @@ import {
   Sparkles,
   TrendingUp,
   Activity,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import ReviewForm from "@/components/ReviewForm";
-import { supabase } from "@/components/SupabaseClient";
-import TestimonialSlider from "@/components/ui/testimonial-slider";
-import { useNavigate } from "react-router-dom";
-
+} from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import ReviewForm from "@/components/ReviewForm"
+import { supabase } from "@/components/SupabaseClient"
+import TestimonialSlider from "@/components/ui/testimonial-slider"
+import { useNavigate } from "react-router-dom"
 
 // Custom hook for intersection observer
 const useIntersectionObserver = (options = {}) => {
-  const [isIntersecting, setIsIntersecting] = useState(false);
-  const ref = useRef(null);
+  const [isIntersecting, setIsIntersecting] = useState(false)
+  const ref = useRef(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
-      setIsIntersecting(entry.isIntersecting);
-    }, options);
+      setIsIntersecting(entry.isIntersecting)
+    }, options)
 
-    const node = ref.current;
+    const node = ref.current
     if (node) {
-      observer.observe(node);
+      observer.observe(node)
     }
 
     return () => {
       if (node) {
-        observer.unobserve(node);
+        observer.unobserve(node)
       }
-    };
-  }, [options]);
+    }
+  }, [options])
 
-  return [ref, isIntersecting];
-};
+  return [ref, isIntersecting]
+}
 
 export default function HomePage() {
-  // Removed unused approvedReviews state - using ReviewList component instead
   const [stats, setStats] = useState({
     totalPatients: 500,
     averageRating: 4.9,
     totalReviews: 0,
-  });
-    const navigate = useNavigate();
+  })
+  const navigate = useNavigate()
 
-  const [blogs, setBlogs] = useState([]);
-  const [isLoadingBlogs, setIsLoadingBlogs] = useState(true);
+  const [blogs, setBlogs] = useState([])
+  const [isLoadingBlogs, setIsLoadingBlogs] = useState(true)
   const [animatedStats, setAnimatedStats] = useState({
     totalPatients: 0,
     averageRating: 0,
     totalReviews: 0,
-  });
+  })
 
   // Intersection observer refs
-  const [heroRef, heroInView] = useIntersectionObserver({ threshold: 0.1 });
-  const [doctorRef, doctorInView] = useIntersectionObserver({ threshold: 0.2 });
+  const [heroRef, heroInView] = useIntersectionObserver({ threshold: 0.1 })
+  const [doctorRef, doctorInView] = useIntersectionObserver({ threshold: 0.2 })
   const [servicesRef, servicesInView] = useIntersectionObserver({
     threshold: 0.1,
-  });
+  })
   const [reviewsRef, reviewsInView] = useIntersectionObserver({
     threshold: 0.1,
-  });
-  const [blogRef, blogInView] = useIntersectionObserver({ threshold: 0.1 });
-  const [ctaRef, ctaInView] = useIntersectionObserver({ threshold: 0.1 });
+  })
+  const [blogRef, blogInView] = useIntersectionObserver({ threshold: 0.1 })
+  const [ctaRef, ctaInView] = useIntersectionObserver({ threshold: 0.1 })
 
   // Animate stats when in view
   useEffect(() => {
     if (doctorInView) {
       const animateValue = (start, end, duration, setter, key) => {
-        const startTime = Date.now();
+        const startTime = Date.now()
         const animate = () => {
-          const elapsed = Date.now() - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          const current = start + (end - start) * progress;
+          const elapsed = Date.now() - startTime
+          const progress = Math.min(elapsed / duration, 1)
+          const current = start + (end - start) * progress
           setter((prev) => ({
             ...prev,
-            [key]:
-              key === "averageRating"
-                ? Math.round(current * 10) / 10
-                : Math.floor(current),
-          }));
+            [key]: key === "averageRating" ? Math.round(current * 10) / 10 : Math.floor(current),
+          }))
           if (progress < 1) {
-            requestAnimationFrame(animate);
+            requestAnimationFrame(animate)
           }
-        };
-        requestAnimationFrame(animate);
-      };
+        }
+        requestAnimationFrame(animate)
+      }
 
-      animateValue(
-        0,
-        stats.totalPatients,
-        2000,
-        setAnimatedStats,
-        "totalPatients"
-      );
-      animateValue(
-        0,
-        stats.averageRating,
-        2000,
-        setAnimatedStats,
-        "averageRating"
-      );
-      animateValue(
-        0,
-        stats.totalReviews,
-        2000,
-        setAnimatedStats,
-        "totalReviews"
-      );
+      animateValue(0, stats.totalPatients, 2000, setAnimatedStats, "totalPatients")
+      animateValue(0, stats.averageRating, 2000, setAnimatedStats, "averageRating")
+      animateValue(0, stats.totalReviews, 2000, setAnimatedStats, "totalReviews")
     }
-  }, [doctorInView, stats]);
+  }, [doctorInView, stats])
 
   // Fetch data
   useEffect(() => {
-    // Removed fetchApprovedReviews - using ReviewList component instead
-
     const fetchStats = async () => {
       try {
-        const { data, error } = await supabase.from("reviews").select("rating");
+        const { data, error } = await supabase.from("reviews").select("rating")
 
         if (error) {
-          console.error("Error fetching stats:", error);
+          console.error("Error fetching stats:", error)
         } else if (data && data.length > 0) {
-          const totalReviews = data.length;
+          const totalReviews = data.length
           const averageRating =
-            data.reduce((sum, review) => sum + review.rating, 0) / totalReviews;
+            data.reduce((sum, review) => sum + review.rating, 0) / totalReviews
           setStats((prev) => ({
             ...prev,
             totalReviews,
             averageRating: Math.round(averageRating * 10) / 10,
-          }));
+          }))
         }
       } catch (error) {
-        console.error("Error:", error);
+        console.error("Error:", error)
       }
-    };
+    }
 
     const fetchBlogs = async () => {
       try {
@@ -161,40 +136,40 @@ export default function HomePage() {
           .select("*")
           .eq("is_published", true)
           .order("created_at", { ascending: false })
-          .limit(5);
+          .limit(5)
 
         if (error) {
-          console.error("Error fetching blogs:", error);
-          setBlogs([]);
+          console.error("Error fetching blogs:", error)
+          setBlogs([])
         } else {
-          setBlogs(data || []);
+          setBlogs(data || [])
         }
       } catch (error) {
-        console.error("Error:", error);
-        setBlogs([]);
+        console.error("Error:", error)
+        setBlogs([])
       } finally {
-        setIsLoadingBlogs(false);
+        setIsLoadingBlogs(false)
       }
-    };
+    }
 
-    fetchStats();
-    fetchBlogs();
-  }, []);
+    fetchStats()
+    fetchBlogs()
+  }, [])
 
   const createSlug = (title) => {
     return title
       .toLowerCase()
       .replace(/[^a-z0-9 -]/g, "")
       .replace(/\s+/g, "-")
-      .replace(/-+/g, "-");
-  };
+      .replace(/-+/g, "-")
+  }
 
   const getReadingTime = (content) => {
-    const wordsPerMinute = 200;
-    const wordCount = content ? content.split(" ").length : 0;
-    const readingTime = Math.ceil(wordCount / wordsPerMinute);
-    return `${readingTime} min read`;
-  };
+    const wordsPerMinute = 200
+    const wordCount = content ? content.split(" ").length : 0
+    const readingTime = Math.ceil(wordCount / wordsPerMinute)
+    return `${readingTime} min read`
+  }
 
   const getCategoryColor = (category) => {
     const colors = {
@@ -210,30 +185,45 @@ export default function HomePage() {
         "bg-gradient-to-r from-yellow-50 to-yellow-100 text-yellow-700 border-yellow-200",
       Prevention:
         "bg-gradient-to-r from-indigo-50 to-indigo-100 text-indigo-700 border-indigo-200",
-    };
+    }
     return (
       colors[category] ||
       "bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 border-gray-200"
-    );
-  };
+    )
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 overflow-x-hidden">
-      {/* Floating Elements */}
+    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#f8fafb" }}>
+      {/* Floating Elements with New Color Scheme */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-40 left-1/4 w-80 h-80 bg-green-200/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
+        <div
+          className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl animate-pulse opacity-20"
+          style={{ backgroundColor: "#00799e" }}
+        ></div>
+        <div
+          className="absolute top-40 right-20 w-96 h-96 rounded-full blur-3xl animate-pulse delay-1000 opacity-20"
+          style={{ backgroundColor: "#d2084f" }}
+        ></div>
+        <div
+          className="absolute bottom-40 left-1/4 w-80 h-80 rounded-full blur-3xl animate-pulse delay-2000 opacity-15"
+          style={{ backgroundColor: "#b5e5ef" }}
+        ></div>
       </div>
 
-      {/* Hero Section */}
+      {/* Hero Section - Updated with teal primary color and hot pink accents */}
       <section
         ref={heroRef}
-        className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white overflow-hidden min-h-screen flex items-center"
+        className="relative text-white overflow-hidden min-h-screen flex items-center"
+        style={{
+          background: "linear-gradient(135deg, #00799e 0%, #015a7d 50%, #031621 100%)",
+        }}
       >
         {/* Animated Background */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/90 to-transparent"></div>
+          <div
+            className="absolute inset-0 bg-gradient-to-r opacity-90"
+            style={{ background: "linear-gradient(to right, #00799e 0%, transparent 100%)" }}
+          ></div>
           <div className="absolute top-0 left-0 w-full h-full">
             <div className="absolute top-20 left-20 w-2 h-2 bg-white/30 rounded-full animate-ping"></div>
             <div className="absolute top-40 right-32 w-1 h-1 bg-white/40 rounded-full animate-ping delay-1000"></div>
@@ -245,44 +235,49 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div
               className={`space-y-8 transition-all duration-1000 ${
-                heroInView
-                  ? "translate-x-0 opacity-100"
-                  : "-translate-x-10 opacity-0"
+                heroInView ? "translate-x-0 opacity-100" : "-translate-x-10 opacity-0"
               }`}
             >
               <div className="space-y-6">
-                <div className="flex items-center space-x-3 text-blue-200 group">
-                  <div className="p-2 bg-white/10 rounded-full backdrop-blur-sm group-hover:bg-white/20 transition-colors duration-300">
+                <div className="flex items-center space-x-3 text-white/80 group">
+                  <div
+                    className="p-2 bg-white/10 rounded-full backdrop-blur-sm group-hover:bg-white/20 transition-colors duration-300"
+                    style={{ backgroundColor: "rgba(181, 229, 239, 0.2)" }}
+                  >
                     <Shield className="h-5 w-5" />
                   </div>
-                  <span className="text-sm font-medium tracking-wide">
-                    Trusted Healthcare Provider Since 2003
-                  </span>
+                  <span className="text-sm font-medium tracking-wide">Trusted Healthcare Provider Since 2003</span>
                 </div>
 
                 <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight">
                   Welcome to{" "}
                   <span className="relative">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 animate-pulse">
+                    <span
+                      className="text-transparent bg-clip-text animate-pulse"
+                      style={{ backgroundImage: "linear-gradient(90deg, #b5e5ef, #d2084f)" }}
+                    >
                       Raj Clinic
                     </span>
-                    <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full transform scale-x-0 animate-pulse"></div>
+                    <div
+                      className="absolute -bottom-2 left-0 w-full h-1 rounded-full transform scale-x-0 animate-pulse"
+                      style={{ backgroundColor: "#d2084f" }}
+                    ></div>
                   </span>
                 </h1>
 
-                <p className="text-xl md:text-2xl text-blue-100 leading-relaxed">
+                <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
                   Comprehensive Care in{" "}
-                  <span className="font-semibold text-yellow-300 relative">
+                  <span className="font-semibold relative" style={{ color: "#b5e5ef" }}>
                     Diabetes
                     <Sparkles className="inline h-5 w-5 ml-1 animate-spin" />
                   </span>
                   ,{" "}
-                  <span className="font-semibold text-yellow-300 relative">
+                  <span className="font-semibold relative" style={{ color: "#d2084f" }}>
                     Cancer Treatment
                     <Heart className="inline h-5 w-5 ml-1 animate-pulse" />
                   </span>
                   , and{" "}
-                  <span className="font-semibold text-yellow-300 relative">
+                  <span className="font-semibold relative" style={{ color: "#b5e5ef" }}>
                     Mental Wellness
                     <Activity className="inline h-5 w-5 ml-1 animate-bounce" />
                   </span>
@@ -292,19 +287,24 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-blue-900 font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 group"
-                  onClick={() => navigate("/appointment")}
+                  className="font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 group text-white"
+                  style={{
+                    backgroundColor: "#d2084f",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#a00640")}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#d2084f")}
                 >
                   <Calendar className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
                   Book an Appointment
-                  <div className="absolute inset-0 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping"></div>
                 </Button>
 
                 <Button
                   variant="outline"
                   size="lg"
-                  className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 group"
-                  onClick={() => window.open("tel:+919987127646", "_self")}
+                  className="font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 group text-white border-white/30 bg-transparent"
+                  style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.2)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.1)")}
                 >
                   <Phone className="mr-2 h-5 w-5 group-hover:animate-pulse" />
                   Call Now
@@ -317,15 +317,16 @@ export default function HomePage() {
                     {[1, 2, 3, 4].map((i) => (
                       <div
                         key={i}
-                        className="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 border-3 border-white shadow-lg transform group-hover:scale-110 transition-transform duration-300"
-                        style={{ animationDelay: `${i * 100}ms` }}
+                        className="w-10 h-10 rounded-full border-3 border-white shadow-lg transform group-hover:scale-110 transition-transform duration-300"
+                        style={{
+                          backgroundColor: i % 2 === 0 ? "#b5e5ef" : "#d2084f",
+                          animationDelay: `${i * 100}ms`,
+                        }}
                       ></div>
                     ))}
                   </div>
-                  <div className="text-blue-200">
-                    <div className="font-semibold text-white">
-                      {animatedStats.totalPatients}+
-                    </div>
+                  <div className="text-white/80">
+                    <div className="font-semibold text-white">{animatedStats.totalPatients}+</div>
                     <div className="text-sm">Happy Patients</div>
                   </div>
                 </div>
@@ -335,15 +336,13 @@ export default function HomePage() {
                     {[1, 2, 3, 4, 5].map((i) => (
                       <Star
                         key={i}
-                        className="h-5 w-5 fill-yellow-400 text-yellow-400 group-hover:animate-pulse"
+                        className="h-5 w-5 fill-current text-white group-hover:animate-pulse"
                         style={{ animationDelay: `${i * 100}ms` }}
                       />
                     ))}
                   </div>
-                  <div className="text-blue-200">
-                    <div className="font-semibold text-white">
-                      {animatedStats.averageRating}/5
-                    </div>
+                  <div className="text-white/80">
+                    <div className="font-semibold text-white">{animatedStats.averageRating}/5</div>
                     <div className="text-sm">Rating</div>
                   </div>
                 </div>
@@ -351,27 +350,38 @@ export default function HomePage() {
             </div>
 
             <div
-              className={`relative lg:block hidden transition-all duration-1000 delay-300 ${
-                heroInView
-                  ? "translate-x-0 opacity-100"
-                  : "translate-x-10 opacity-0"
+              className={`relative transition-all duration-1000 delay-300 ${
+                heroInView ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"
               }`}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-transparent rounded-3xl transform rotate-3"></div>
-              <div className="absolute inset-0 bg-gradient-to-l from-purple-600/20 to-transparent rounded-3xl transform -rotate-3"></div>
+              <div
+                className="absolute inset-0 rounded-3xl transform rotate-3 opacity-20"
+                style={{ backgroundColor: "#00799e" }}
+              ></div>
+              <div
+                className="absolute inset-0 rounded-3xl transform -rotate-3 opacity-15"
+                style={{ backgroundColor: "#d2084f" }}
+              ></div>
               <img
                 src="/clinic.png"
                 alt="Modern medical facility"
                 className="relative rounded-3xl shadow-2xl object-cover w-full h-[600px] transform hover:scale-105 transition-transform duration-700 hover:rotate-1"
               />
-              <div className="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl transform hover:scale-110 transition-transform duration-300">
+              <div
+                className="absolute -bottom-6 -right-6 backdrop-blur-sm rounded-2xl p-6 shadow-2xl transform hover:scale-110 transition-transform duration-300"
+                style={{ backgroundColor: "rgba(255, 255, 255, 0.95)" }}
+              >
                 <div className="flex items-center space-x-3">
-                  <div className="p-3 bg-gradient-to-r from-green-400 to-green-500 rounded-full">
+                  <div className="p-3 rounded-full" style={{ backgroundColor: "#d2084f" }}>
                     <TrendingUp className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <div className="font-bold text-gray-900 text-xl">98%</div>
-                    <div className="text-sm text-gray-600">Success Rate</div>
+                    <div className="font-bold text-xl" style={{ color: "#031621" }}>
+                      98%
+                    </div>
+                    <div className="text-sm" style={{ color: "#031621" }}>
+                      Success Rate
+                    </div>
                   </div>
                 </div>
               </div>
@@ -380,38 +390,47 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Doctor Info */}
-      <section
-        ref={doctorRef}
-        className="py-24 bg-gradient-to-b from-white to-gray-50 relative"
-      >
+      {/* Doctor Info Section - Updated with teal and hot pink accent colors */}
+      <section ref={doctorRef} className="py-24 relative" style={{ backgroundColor: "#ffffff" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div
               className={`relative transition-all duration-1000 ${
-                doctorInView
-                  ? "translate-x-0 opacity-100"
-                  : "-translate-x-10 opacity-0"
+                doctorInView ? "translate-x-0 opacity-100" : "-translate-x-10 opacity-0"
               }`}
             >
-              <div className="absolute -inset-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl opacity-10 blur-xl"></div>
+              <div
+                className="absolute -inset-6 rounded-3xl opacity-10 blur-xl"
+                style={{ backgroundColor: "#00799e" }}
+              ></div>
               <div className="relative group">
                 <img
                   src="/doctor.webp"
                   alt="Dr. Sanjay Pal"
                   className="relative rounded-3xl shadow-2xl object-cover w-full max-h-[500px] transform group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div
+                  className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ background: "linear-gradient(to top, rgba(3, 22, 33, 0.3), transparent)" }}
+                ></div>
               </div>
 
-              <div className="absolute -bottom-8 -right-8 bg-white rounded-3xl p-6 shadow-2xl transform hover:scale-110 transition-transform duration-300 group">
+              <div
+                className="absolute -bottom-8 -right-8 rounded-3xl p-6 shadow-2xl transform hover:scale-110 transition-transform duration-300 group"
+                style={{ backgroundColor: "rgba(255, 255, 255, 0.98)" }}
+              >
                 <div className="flex items-center space-x-4">
-                  <div className="p-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl group-hover:rotate-12 transition-transform duration-300">
+                  <div
+                    className="p-4 rounded-2xl group-hover:rotate-12 transition-transform duration-300"
+                    style={{ backgroundColor: "#d2084f" }}
+                  >
                     <Award className="h-8 w-8 text-white" />
                   </div>
                   <div>
-                    <div className="font-bold text-gray-900 text-2xl">20+</div>
-                    <div className="text-sm text-gray-600 font-medium">
+                    <div className="font-bold text-2xl" style={{ color: "#031621" }}>
+                      20+
+                    </div>
+                    <div className="text-sm font-medium" style={{ color: "#031621" }}>
                       Years Experience
                     </div>
                   </div>
@@ -421,78 +440,99 @@ export default function HomePage() {
 
             <div
               className={`space-y-8 transition-all duration-1000 delay-300 ${
-                doctorInView
-                  ? "translate-x-0 opacity-100"
-                  : "translate-x-10 opacity-0"
+                doctorInView ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"
               }`}
             >
               <div className="space-y-6">
-                <div className="flex items-center space-x-3 text-blue-600 group">
-                  <div className="p-2 bg-blue-100 rounded-full group-hover:bg-blue-200 transition-colors duration-300">
+                <div className="flex items-center space-x-3 group" style={{ color: "#00799e" }}>
+                  <div
+                    className="p-2 rounded-full group-hover:opacity-80 transition-opacity duration-300"
+                    style={{ backgroundColor: "#b5e5ef" }}
+                  >
                     <Heart className="h-5 w-5 group-hover:animate-pulse" />
                   </div>
-                  <span className="text-sm font-medium uppercase tracking-wide">
-                    Meet Your Doctor
-                  </span>
+                  <span className="text-sm font-medium uppercase tracking-wide">Meet Your Doctor</span>
                 </div>
 
-                <h2 className="text-4xl lg:text-6xl font-bold text-gray-900 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text">
+                <h2
+                  className="text-4xl lg:text-6xl font-bold bg-clip-text text-transparent"
+                  style={{ backgroundImage: "linear-gradient(90deg, #031621, #00799e)" }}
+                >
                   Dr. Sanjay Pal
                 </h2>
 
-                <p className="text-xl text-gray-600 leading-relaxed">
+                <p className="text-xl leading-relaxed" style={{ color: "#031621" }}>
                   With over{" "}
-                  <span className="font-bold text-blue-600">20 years</span> of
-                  experience, Dr. Sanjay Pal is a highly respected physician
-                  specializing in Diabetes management, Cancer treatment
-                  strategies, and General Counseling.
+                  <span className="font-bold" style={{ color: "#00799e" }}>
+                    20 years
+                  </span>{" "}
+                  of experience, Dr. Sanjay Pal is a highly respected physician specializing in Diabetes management,
+                  Cancer treatment strategies, and General Counseling.
                 </p>
 
-                <p className="text-lg text-gray-700 leading-relaxed">
+                <p className="text-lg leading-relaxed" style={{ color: "#031621" }}>
                   His integrative approach has helped{" "}
-                  <span className="font-semibold text-green-600">
+                  <span className="font-semibold" style={{ color: "#d2084f" }}>
                     hundreds of patients
                   </span>{" "}
-                  through early diagnosis, effective treatment planning, and
-                  emotional recovery—ensuring long-term health and well-being.
+                  through early diagnosis, effective treatment planning, and emotional recovery—ensuring long-term
+                  health and well-being.
                 </p>
               </div>
 
               <div className="grid grid-cols-2 gap-6">
-                <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl transform hover:scale-105 transition-transform duration-300 group">
-                  <div className="text-4xl font-bold text-blue-600 group-hover:animate-pulse">
+                <div
+                  className="text-center p-6 rounded-2xl transform hover:scale-105 transition-transform duration-300 group"
+                  style={{ backgroundColor: "#b5e5ef" }}
+                >
+                  <div className="text-4xl font-bold group-hover:animate-pulse" style={{ color: "#00799e" }}>
                     {animatedStats.totalPatients}+
                   </div>
-                  <div className="text-sm text-gray-600 font-medium">
+                  <div className="text-sm font-medium" style={{ color: "#031621" }}>
                     Patients Treated
                   </div>
                 </div>
-                <div className="text-center p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl transform hover:scale-105 transition-transform duration-300 group">
-                  <div className="text-4xl font-bold text-green-600 group-hover:animate-pulse">
+                <div
+                  className="text-center p-6 rounded-2xl transform hover:scale-105 transition-transform duration-300 group"
+                  style={{ backgroundColor: "#f0e7ef" }}
+                >
+                  <div className="text-4xl font-bold group-hover:animate-pulse" style={{ color: "#d2084f" }}>
                     98%
                   </div>
-                  <div className="text-sm text-gray-600 font-medium">
+                  <div className="text-sm font-medium" style={{ color: "#031621" }}>
                     Success Rate
                   </div>
                 </div>
               </div>
 
               <div className="flex flex-wrap gap-3">
-                {[
-                  "Board Certified",
-                  "20+ Years Experience",
-                  "Holistic Approach",
-                  "Patient-Centered Care",
-                ].map((badge, index) => (
-                  <span
-                    key={badge}
-                    className="px-4 py-2 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 rounded-full text-sm font-medium transform hover:scale-105 transition-transform duration-300 hover:shadow-lg"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    {badge}
-                  </span>
-                ))}
+                {["Board Certified", "20+ Years Experience", "Compassionate Care", "Advanced Diagnosis"].map(
+                  (badge, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium"
+                      style={{
+                        backgroundColor: index % 2 === 0 ? "#b5e5ef" : "#f0e7ef",
+                        color: index % 2 === 0 ? "#00799e" : "#d2084f",
+                      }}
+                    >
+                      <CheckCircle className="h-4 w-4" />
+                      <span>{badge}</span>
+                    </div>
+                  ),
+                )}
               </div>
+
+              <Button
+                size="lg"
+                className="w-full font-semibold py-6 rounded-full text-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                style={{ backgroundColor: "#00799e" }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#005b7a")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#00799e")}
+              >
+                <Phone className="mr-2 h-5 w-5" />
+                Schedule Consultation
+              </Button>
             </div>
           </div>
         </div>
@@ -937,94 +977,52 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Call to Action */}
+      {/* CTA Section - Applied teal and hot pink color scheme */}
       <section
         ref={ctaRef}
-        className="py-24 bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 text-white relative overflow-hidden"
+        className="py-20 text-white relative overflow-hidden"
+        style={{
+          background: "linear-gradient(135deg, #00799e 0%, #031621 100%)",
+        }}
       >
-        {/* Animated Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-2 h-2 bg-white/30 rounded-full animate-ping"></div>
-          <div className="absolute top-20 right-20 w-1 h-1 bg-white/40 rounded-full animate-ping delay-1000"></div>
-          <div className="absolute bottom-20 left-1/4 w-1.5 h-1.5 bg-white/20 rounded-full animate-ping delay-2000"></div>
-          <div className="absolute bottom-10 right-1/3 w-1 h-1 bg-white/30 rounded-full animate-ping delay-3000"></div>
+          <div
+            className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-20"
+            style={{ backgroundColor: "#d2084f" }}
+          ></div>
+          <div
+            className="absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-15"
+            style={{ backgroundColor: "#b5e5ef" }}
+          ></div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-          <div
-            className={`space-y-10 transition-all duration-1000 ${
-              ctaInView
-                ? "translate-y-0 opacity-100"
-                : "translate-y-10 opacity-0"
-            }`}
-          >
-            <div className="space-y-6">
-              <h2 className="text-4xl lg:text-6xl font-bold leading-tight">
-                Take Charge of Your{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400 animate-pulse">
-                  Health Journey
-                </span>
-              </h2>
-              <p className="text-xl text-blue-100 max-w-4xl mx-auto leading-relaxed">
-                We're here to support your journey toward physical and mental
-                wellness. Schedule your consultation today and take the first
-                step towards a healthier, happier life with personalized care.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-blue-900 font-semibold px-10 py-5 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 group relative overflow-hidden"
-                onClick={() => navigate("/appointment")}
-              >
-                <div className="absolute inset-0 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping"></div>
-                <Calendar className="mr-3 h-6 w-6 group-hover:rotate-12 transition-transform duration-300" />
-                Book Your Appointment
-              </Button>
-
-              <div className="flex items-center space-x-4 text-blue-200 group">
-                <div className="p-3 bg-white/10 rounded-full backdrop-blur-sm group-hover:bg-white/20 transition-colors duration-300">
-                  <Clock className="h-6 w-6 group-hover:animate-pulse" />
-                </div>
-                <div className="text-left">
-                  <div className="font-semibold text-white">Available 24/7</div>
-                  <div className="text-sm">for emergencies</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-16">
-              <div className="flex items-center justify-center space-x-4 group">
-                <div className="p-4 bg-white/10 rounded-full backdrop-blur-sm group-hover:bg-white/20 transition-colors duration-300 group-hover:scale-110">
-                  <Phone className="h-6 w-6 text-yellow-400 group-hover:animate-pulse" />
-                </div>
-                <div className="text-left">
-                  <div className="font-semibold text-lg">Call Us</div>
-                  <div className="text-blue-200">+91 9987127646</div>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-center space-x-4 group">
-                <div className="p-4 bg-white/10 rounded-full backdrop-blur-sm group-hover:bg-white/20 transition-colors duration-300 group-hover:scale-110">
-                  <Mail className="h-6 w-6 text-yellow-400 group-hover:animate-pulse" />
-                </div>
-                <div className="text-left">
-                  <div className="font-semibold text-lg">Email Us</div>
-                  <div className="text-blue-200">info@rajclinic.com</div>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-center space-x-4 group">
-                <div className="p-4 bg-white/10 rounded-full backdrop-blur-sm group-hover:bg-white/20 transition-colors duration-300 group-hover:scale-110">
-                  <MapPin className="h-6 w-6 text-yellow-400 group-hover:animate-pulse" />
-                </div>
-                <div className="text-left">
-                  <div className="font-semibold text-lg">Visit Us</div>
-                  <div className="text-blue-200">7/8, Samruddhi Shopping Centre, Kandivali Village, M.G Road, Kandivali (W), Mumai 400 067, Landmark :Near Nirmal College</div>
-                </div>
-              </div>
-            </div>
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">Ready to Transform Your Health?</h2>
+          <p className="text-xl text-white/90 mb-8 leading-relaxed">
+            Take the first step towards better health and wellness today.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              size="lg"
+              className="font-semibold px-8 py-4 rounded-full text-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+              style={{ backgroundColor: "#d2084f" }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#a00640")}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#d2084f")}
+            >
+              <Calendar className="mr-2 h-5 w-5" />
+              Book Appointment Now
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="font-semibold px-8 py-4 rounded-full border-white/30 text-white hover:bg-white/10 bg-transparent"
+              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.2)")}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.1)")}
+            >
+              <Phone className="mr-2 h-5 w-5" />
+              Get in Touch
+            </Button>
           </div>
         </div>
       </section>
@@ -1035,9 +1033,8 @@ export default function HomePage() {
           <div className="transform hover:scale-105 transition-transform duration-500">
             <ReviewForm />
           </div>
-          
         </div>
       </section>
     </div>
-  );
+  )
 }
