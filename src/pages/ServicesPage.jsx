@@ -2,10 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
-
 const ServicesPage = () => {
     const navigate = useNavigate();
-
     const location = useLocation();
 
   useEffect(() => {
@@ -20,9 +18,9 @@ const ServicesPage = () => {
   }, [location]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+    <div className="min-h-screen" style={{ backgroundColor: "#f8fafb" }}>
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
+      <div className="relative text-white py-20" style={{ background: "linear-gradient(135deg, #00799e 0%, #015a7d 50%, #031621 100%)" }}>
         <div className="absolute inset-0 bg-black opacity-10"></div>
         <div className="relative max-w-6xl mx-auto px-6 text-center">
           <h1 className="text-5xl font-bold mb-4">Our Services</h1>
@@ -36,7 +34,7 @@ const ServicesPage = () => {
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-3 gap-8 mb-20">
           <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full mx-auto mb-6 flex items-center justify-center">
+            <div className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center" style={{ backgroundColor: "#00799e" }}>
               <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
@@ -46,12 +44,12 @@ const ServicesPage = () => {
                 />
               </svg>
             </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">Diabetes Care</h3>
-            <p className="text-gray-600">Comprehensive diabetes reversal through holistic lifestyle management</p>
+            <h3 className="text-2xl font-bold mb-4" style={{ color: "#031621" }}>Diabetes Care</h3>
+            <p style={{ color: "#031621" }}>Comprehensive diabetes reversal through holistic lifestyle management</p>
           </div>
 
           <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full mx-auto mb-6 flex items-center justify-center">
+            <div className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center" style={{ backgroundColor: "#d2084f" }}>
               <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
@@ -61,13 +59,13 @@ const ServicesPage = () => {
                 />
               </svg>
             </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">Cancer Care</h3>
-            <p className="text-gray-600">Supportive cancer treatment with focus on patient well-being and recovery</p>
+            <h3 className="text-2xl font-bold mb-4" style={{ color: "#031621" }}>Cancer Care</h3>
+            <p style={{ color: "#031621" }}>Supportive cancer treatment with focus on patient well-being and recovery</p>
           </div>
 
           <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full mx-auto mb-6 flex items-center justify-center">
-              <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center" style={{ backgroundColor: "#b5e5ef" }}>
+              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#00799e" }}>
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -76,8 +74,8 @@ const ServicesPage = () => {
                 />
               </svg>
             </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">Counselling</h3>
-            <p className="text-gray-600">
+            <h3 className="text-2xl font-bold mb-4" style={{ color: "#031621" }}>Counselling</h3>
+            <p style={{ color: "#031621" }}>
               Professional psychological support for mental health and emotional well-being
             </p>
           </div>
@@ -87,7 +85,7 @@ const ServicesPage = () => {
         <div className="mb-20" id="diabetes">
           <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12">
             <div className="text-center mb-12">
-              <div className="w-24 h-24 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full mx-auto mb-6 flex items-center justify-center">
+              <div className="w-24 h-24 rounded-full mx-auto mb-6 flex items-center justify-center" style={{ backgroundColor: "#00799e" }}>
                 <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
@@ -97,70 +95,70 @@ const ServicesPage = () => {
                   />
                 </svg>
               </div>
-              <h2 className="text-4xl font-bold text-gray-800 mb-4">Diabetes Reversal Program</h2>
-              <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
+              <h2 className="text-4xl font-bold mb-4" style={{ color: "#031621" }}>Diabetes Reversal Program</h2>
+              <div className="w-20 h-1 mx-auto" style={{ backgroundColor: "#00799e" }}></div>
             </div>
 
             {/* Mental Stress Section */}
             <div className="mb-12">
-              <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                <div className="w-8 h-8 bg-red-100 rounded-full mr-3 flex items-center justify-center">
-                  <span className="text-red-600 font-bold">1</span>
+              <h3 className="text-2xl font-bold mb-6 flex items-center" style={{ color: "#031621" }}>
+                <div className="w-8 h-8 rounded-full mr-3 flex items-center justify-center text-white font-bold" style={{ backgroundColor: "#d2084f" }}>
+                  1
                 </div>
                 Mental Stress Management
               </h3>
-              <p className="text-gray-700 mb-6">
+              <p className="mb-6" style={{ color: "#031621" }}>
                 Understanding and managing mental stress that can cause or increase diabetes:
               </p>
 
               <div className="grid lg:grid-cols-2 gap-8">
-                <div className="bg-red-50 p-6 rounded-xl border-l-4 border-red-400">
-                  <h4 className="font-bold text-red-800 mb-4">Fasting Related Stress</h4>
-                  <ul className="space-y-2 text-gray-700">
+                <div className="p-6 rounded-xl border-l-4" style={{ backgroundColor: "#f0e7ef", borderColor: "#d2084f" }}>
+                  <h4 className="font-bold mb-4" style={{ color: "#d2084f" }}>Fasting Related Stress</h4>
+                  <ul className="space-y-2" style={{ color: "#031621" }}>
                     <li className="flex items-start">
-                      <span className="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="w-2 h-2 rounded-full mr-3 flex-shrink-0 mt-2" style={{ backgroundColor: "#d2084f" }}></span>
                       Losing sweetness in life (disgusting feeling)
                     </li>
                     <li className="flex items-start">
-                      <span className="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="w-2 h-2 rounded-full mr-3 flex-shrink-0 mt-2" style={{ backgroundColor: "#d2084f" }}></span>
                       Having no enthusiasm or zeal in life
                     </li>
                     <li className="flex items-start">
-                      <span className="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="w-2 h-2 rounded-full mr-3 flex-shrink-0 mt-2" style={{ backgroundColor: "#d2084f" }}></span>
                       Bitterness in relation with loved ones
                     </li>
                     <li className="flex items-start">
-                      <span className="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="w-2 h-2 rounded-full mr-3 flex-shrink-0 mt-2" style={{ backgroundColor: "#d2084f" }}></span>
                       Stress about loved ones
                     </li>
                   </ul>
                 </div>
 
-                <div className="bg-orange-50 p-6 rounded-xl border-l-4 border-orange-400">
-                  <h4 className="font-bold text-orange-800 mb-4">Post Lunch Related Stress</h4>
-                  <ul className="space-y-2 text-gray-700">
+                <div className="p-6 rounded-xl border-l-4" style={{ backgroundColor: "#b5e5ef", borderColor: "#00799e" }}>
+                  <h4 className="font-bold mb-4" style={{ color: "#00799e" }}>Post Lunch Related Stress</h4>
+                  <ul className="space-y-2" style={{ color: "#031621" }}>
                     <li className="flex items-start">
-                      <span className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="w-2 h-2 rounded-full mr-3 flex-shrink-0 mt-2" style={{ backgroundColor: "#00799e" }}></span>
                       Want of energy or power
                     </li>
                     <li className="flex items-start">
-                      <span className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="w-2 h-2 rounded-full mr-3 flex-shrink-0 mt-2" style={{ backgroundColor: "#00799e" }}></span>
                       Too much of work load
                     </li>
                     <li className="flex items-start">
-                      <span className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="w-2 h-2 rounded-full mr-3 flex-shrink-0 mt-2" style={{ backgroundColor: "#00799e" }}></span>
                       Resistance, hurdle, obstacle or struggle in work
                     </li>
                     <li className="flex items-start">
-                      <span className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="w-2 h-2 rounded-full mr-3 flex-shrink-0 mt-2" style={{ backgroundColor: "#00799e" }}></span>
                       Money or finance related stress
                     </li>
                     <li className="flex items-start">
-                      <span className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="w-2 h-2 rounded-full mr-3 flex-shrink-0 mt-2" style={{ backgroundColor: "#00799e" }}></span>
                       Position, designation or progress related stress
                     </li>
                     <li className="flex items-start">
-                      <span className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="w-2 h-2 rounded-full mr-3 flex-shrink-0 mt-2" style={{ backgroundColor: "#00799e" }}></span>
                       Property related stress (expansion or threat)
                     </li>
                   </ul>
@@ -170,67 +168,67 @@ const ServicesPage = () => {
 
             {/* Lifestyle Section */}
             <div className="mb-12">
-              <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                <div className="w-8 h-8 bg-green-100 rounded-full mr-3 flex items-center justify-center">
-                  <span className="text-green-600 font-bold">2</span>
+              <h3 className="text-2xl font-bold mb-6 flex items-center" style={{ color: "#031621" }}>
+                <div className="w-8 h-8 rounded-full mr-3 flex items-center justify-center text-white font-bold" style={{ backgroundColor: "#00799e" }}>
+                  2
                 </div>
                 Lifestyle Management
               </h3>
 
               <div className="grid lg:grid-cols-2 gap-8 mb-8">
-                <div className="bg-green-50 p-6 rounded-xl">
-                  <h4 className="font-bold text-green-800 mb-4">Sleep Guidelines</h4>
-                  <ul className="space-y-2 text-gray-700">
+                <div className="p-6 rounded-xl" style={{ backgroundColor: "#b5e5ef" }}>
+                  <h4 className="font-bold mb-4" style={{ color: "#00799e" }}>Sleep Guidelines</h4>
+                  <ul className="space-y-2" style={{ color: "#031621" }}>
                     <li className="flex items-start">
-                      <span className="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="w-2 h-2 rounded-full mr-3 flex-shrink-0 mt-2" style={{ backgroundColor: "#00799e" }}></span>
                       Avoid sleeping at wrong times
                     </li>
                     <li className="flex items-start">
-                      <span className="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="w-2 h-2 rounded-full mr-3 flex-shrink-0 mt-2" style={{ backgroundColor: "#00799e" }}></span>
                       Sleep 6-8 hours daily
                     </li>
                     <li className="flex items-start">
-                      <span className="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span className="w-2 h-2 rounded-full mr-3 flex-shrink-0 mt-2" style={{ backgroundColor: "#00799e" }}></span>
                       Follow natural sleep cycle
                     </li>
                   </ul>
                 </div>
 
-                <div className="bg-blue-50 p-6 rounded-xl">
-                  <h4 className="font-bold text-blue-800 mb-4">Meal Timing</h4>
-                  <p className="text-gray-700 mb-4">
+                <div className="p-6 rounded-xl" style={{ backgroundColor: "#f0e7ef" }}>
+                  <h4 className="font-bold mb-4" style={{ color: "#d2084f" }}>Meal Timing</h4>
+                  <p className="mb-4" style={{ color: "#031621" }}>
                     Having meals at wrong time affects metabolism and increases diabetes.
                   </p>
-                  <p className="text-sm text-blue-600 font-semibold">
+                  <p className="text-sm font-semibold" style={{ color: "#d2084f" }}>
                     Follow the law of nature: Sleep at night, be awake in the day time.
                   </p>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 text-white">
+              <div className="rounded-2xl p-8 text-white" style={{ background: "linear-gradient(135deg, #00799e 0%, #015a7d 50%, #031621 100%)" }}>
                 <h4 className="text-2xl font-bold mb-6 text-center">Ideal Daily Schedule</h4>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  <div className="bg-white bg-opacity-20 p-4 rounded-lg text-center">
+                  <div className="p-4 rounded-lg text-center" style={{ backgroundColor: "rgba(255, 255, 255, 0.15)" }}>
                     <div className="text-2xl font-bold mb-2">11:00 PM</div>
                     <div className="text-sm opacity-90">Sleep Time</div>
                   </div>
-                  <div className="bg-white bg-opacity-20 p-4 rounded-lg text-center">
+                  <div className="p-4 rounded-lg text-center" style={{ backgroundColor: "rgba(255, 255, 255, 0.15)" }}>
                     <div className="text-2xl font-bold mb-2">7:00 AM</div>
                     <div className="text-sm opacity-90">Wake Up</div>
                   </div>
-                  <div className="bg-white bg-opacity-20 p-4 rounded-lg text-center">
+                  <div className="p-4 rounded-lg text-center" style={{ backgroundColor: "rgba(255, 255, 255, 0.15)" }}>
                     <div className="text-2xl font-bold mb-2">9:00 AM</div>
                     <div className="text-sm opacity-90">Breakfast</div>
                   </div>
-                  <div className="bg-white bg-opacity-20 p-4 rounded-lg text-center">
+                  <div className="p-4 rounded-lg text-center" style={{ backgroundColor: "rgba(255, 255, 255, 0.15)" }}>
                     <div className="text-2xl font-bold mb-2">1:00 PM</div>
                     <div className="text-sm opacity-90">Lunch</div>
                   </div>
-                  <div className="bg-white bg-opacity-20 p-4 rounded-lg text-center">
+                  <div className="p-4 rounded-lg text-center" style={{ backgroundColor: "rgba(255, 255, 255, 0.15)" }}>
                     <div className="text-2xl font-bold mb-2">4:30 PM</div>
                     <div className="text-sm opacity-90">Evening Snacks</div>
                   </div>
-                  <div className="bg-white bg-opacity-20 p-4 rounded-lg text-center">
+                  <div className="p-4 rounded-lg text-center" style={{ backgroundColor: "rgba(255, 255, 255, 0.15)" }}>
                     <div className="text-2xl font-bold mb-2">8:00 PM</div>
                     <div className="text-sm opacity-90">Dinner</div>
                   </div>
@@ -243,27 +241,27 @@ const ServicesPage = () => {
 
             {/* Activity and Exercise Section */}
             <div className="mb-8">
-              <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                <div className="w-8 h-8 bg-purple-100 rounded-full mr-3 flex items-center justify-center">
-                  <span className="text-purple-600 font-bold">3</span>
+              <h3 className="text-2xl font-bold mb-6 flex items-center" style={{ color: "#031621" }}>
+                <div className="w-8 h-8 rounded-full mr-3 flex items-center justify-center text-white font-bold" style={{ backgroundColor: "#d2084f" }}>
+                  3
                 </div>
                 Activity and Exercise
               </h3>
 
-              <div className="bg-purple-50 p-6 rounded-xl mb-6">
-                <p className="text-lg text-gray-700 mb-4">
-                  <strong className="text-purple-800">
+              <div className="p-6 rounded-xl mb-6" style={{ backgroundColor: "#f0e7ef" }}>
+                <p className="text-lg mb-4" style={{ color: "#031621" }}>
+                  <strong style={{ color: "#d2084f" }}>
                     Activity increases insulin sensitivity and reverses diabetes fastest.
                   </strong>
                 </p>
-                <p className="text-gray-700">
+                <p style={{ color: "#031621" }}>
                   Everyone should exercise at least 1 hour for health out of 24 hours in a day.
                 </p>
               </div>
 
               <div className="grid lg:grid-cols-2 gap-8">
-                <div className="bg-white border-2 border-purple-200 p-6 rounded-xl">
-                  <h4 className="font-bold text-purple-800 mb-4 flex items-center">
+                <div className="p-6 rounded-xl" style={{ backgroundColor: "#ffffff", borderLeft: "4px solid #d2084f" }}>
+                  <h4 className="font-bold mb-4 flex items-center" style={{ color: "#d2084f" }}>
                     <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
@@ -274,18 +272,18 @@ const ServicesPage = () => {
                     </svg>
                     Walking & Jogging Program
                   </h4>
-                  <p className="text-gray-700 mb-4">
+                  <p className="mb-4" style={{ color: "#031621" }}>
                     Do 60 to 90 minutes of alternate walking (10 minutes) and jogging (2 minutes)
                   </p>
-                  <div className="bg-purple-100 p-4 rounded-lg">
-                    <p className="text-sm text-purple-800 font-semibold">
+                  <div className="p-4 rounded-lg" style={{ backgroundColor: "#f0e7ef" }}>
+                    <p className="text-sm font-semibold" style={{ color: "#d2084f" }}>
                       You will see a huge difference in your metabolism and diabetes only in 3 months!
                     </p>
                   </div>
                 </div>
 
-                <div className="bg-white border-2 border-purple-200 p-6 rounded-xl">
-                  <h4 className="font-bold text-purple-800 mb-4 flex items-center">
+                <div className="p-6 rounded-xl" style={{ backgroundColor: "#ffffff", borderLeft: "4px solid #00799e" }}>
+                  <h4 className="font-bold mb-4 flex items-center" style={{ color: "#00799e" }}>
                     <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
@@ -296,29 +294,29 @@ const ServicesPage = () => {
                     </svg>
                     Alternative Activities
                   </h4>
-                  <p className="text-gray-700 mb-4">Do 60 to 90 minutes of any of these activities:</p>
-                  <ul className="space-y-2 text-gray-700">
+                  <p className="mb-4" style={{ color: "#031621" }}>Do 60 to 90 minutes of any of these activities:</p>
+                  <ul className="space-y-2" style={{ color: "#031621" }}>
                     <li className="flex items-center">
-                      <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
+                      <span className="w-2 h-2 rounded-full mr-3" style={{ backgroundColor: "#00799e" }}></span>
                       Gym workouts
                     </li>
                     <li className="flex items-center">
-                      <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
+                      <span className="w-2 h-2 rounded-full mr-3" style={{ backgroundColor: "#00799e" }}></span>
                       Cycling
                     </li>
                     <li className="flex items-center">
-                      <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
+                      <span className="w-2 h-2 rounded-full mr-3" style={{ backgroundColor: "#00799e" }}></span>
                       Swimming
                     </li>
                     <li className="flex items-center">
-                      <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
+                      <span className="w-2 h-2 rounded-full mr-3" style={{ backgroundColor: "#00799e" }}></span>
                       Outdoor sports activities
                     </li>
                   </ul>
                 </div>
               </div>
 
-              <div className="mt-6 bg-gradient-to-r from-green-500 to-green-600 p-6 rounded-xl text-white text-center">
+              <div className="mt-6 p-6 rounded-xl text-white text-center" style={{ backgroundColor: "#00799e" }}>
                 <h4 className="text-xl font-bold mb-2">Expected Results</h4>
                 <p>Significant reduction in HbA1c and number of medicines required</p>
               </div>
@@ -330,7 +328,7 @@ const ServicesPage = () => {
         <div className="mb-20" id="cancer">
           <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12">
             <div className="text-center mb-12">
-              <div className="w-24 h-24 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full mx-auto mb-6 flex items-center justify-center">
+              <div className="w-24 h-24 rounded-full mx-auto mb-6 flex items-center justify-center" style={{ backgroundColor: "#d2084f" }}>
                 <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
@@ -340,46 +338,46 @@ const ServicesPage = () => {
                   />
                 </svg>
               </div>
-              <h2 className="text-4xl font-bold text-gray-800 mb-4">Cancer Care & Support</h2>
-              <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
+              <h2 className="text-4xl font-bold mb-4" style={{ color: "#031621" }}>Cancer Care & Support</h2>
+              <div className="w-20 h-1 mx-auto" style={{ backgroundColor: "#d2084f" }}></div>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-8 mb-8">
               <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">Comprehensive Cancer Support</h3>
-                <p className="text-gray-700 mb-6">
+                <h3 className="text-2xl font-bold mb-4" style={{ color: "#031621" }}>Comprehensive Cancer Support</h3>
+                <p className="mb-6" style={{ color: "#031621" }}>
                   Our cancer care program focuses on providing holistic support throughout your journey, combining
                   medical expertise with emotional and psychological care.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span className="text-gray-700">Personalized treatment planning</span>
+                    <span className="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0" style={{ backgroundColor: "#d2084f" }}></span>
+                    <span style={{ color: "#031621" }}>Personalized treatment planning</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span className="text-gray-700">Nutritional guidance and support</span>
+                    <span className="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0" style={{ backgroundColor: "#d2084f" }}></span>
+                    <span style={{ color: "#031621" }}>Nutritional guidance and support</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span className="text-gray-700">Pain management strategies</span>
+                    <span className="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0" style={{ backgroundColor: "#d2084f" }}></span>
+                    <span style={{ color: "#031621" }}>Pain management strategies</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    <span className="text-gray-700">Family counseling and support</span>
+                    <span className="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0" style={{ backgroundColor: "#d2084f" }}></span>
+                    <span style={{ color: "#031621" }}>Family counseling and support</span>
                   </li>
                 </ul>
               </div>
-              <div className="bg-blue-50 p-6 rounded-xl">
-                <h4 className="font-bold text-blue-800 mb-4">Our Approach</h4>
-                <p className="text-gray-700 mb-4">
+              <div className="p-6 rounded-xl" style={{ backgroundColor: "#b5e5ef" }}>
+                <h4 className="font-bold mb-4" style={{ color: "#00799e" }}>Our Approach</h4>
+                <p className="mb-4" style={{ color: "#031621" }}>
                   We believe in treating the whole person, not just the disease. Our integrated approach combines:
                 </p>
                 <div className="space-y-2">
-                  <div className="bg-white p-3 rounded-lg">Medical Care</div>
-                  <div className="bg-white p-3 rounded-lg">Emotional Support</div>
-                  <div className="bg-white p-3 rounded-lg">Lifestyle Guidance</div>
-                  <div className="bg-white p-3 rounded-lg">Family Support</div>
+                  <div className="bg-white p-3 rounded-lg" style={{ color: "#031621" }}>Medical Care</div>
+                  <div className="bg-white p-3 rounded-lg" style={{ color: "#031621" }}>Emotional Support</div>
+                  <div className="bg-white p-3 rounded-lg" style={{ color: "#031621" }}>Lifestyle Guidance</div>
+                  <div className="bg-white p-3 rounded-lg" style={{ color: "#031621" }}>Family Support</div>
                 </div>
               </div>
             </div>
@@ -390,8 +388,8 @@ const ServicesPage = () => {
         <div className="mb-16" id="counselling">
           <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12">
             <div className="text-center mb-12">
-              <div className="w-24 h-24 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full mx-auto mb-6 flex items-center justify-center">
-                <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-24 h-24 rounded-full mx-auto mb-6 flex items-center justify-center" style={{ backgroundColor: "#b5e5ef" }}>
+                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "#00799e" }}>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -400,14 +398,14 @@ const ServicesPage = () => {
                   />
                 </svg>
               </div>
-              <h2 className="text-4xl font-bold text-gray-800 mb-4">Professional Counselling</h2>
-              <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
+              <h2 className="text-4xl font-bold mb-4" style={{ color: "#031621" }}>Professional Counselling</h2>
+              <div className="w-20 h-1 mx-auto" style={{ backgroundColor: "#00799e" }}></div>
             </div>
 
             <div className="grid lg:grid-cols-3 gap-8 mb-8">
-              <div className="text-center p-6 bg-blue-50 rounded-xl">
-                <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="text-center p-6 rounded-xl" style={{ backgroundColor: "#b5e5ef" }}>
+                <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center" style={{ backgroundColor: "#00799e" }}>
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -416,13 +414,13 @@ const ServicesPage = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">Individual Therapy</h3>
-                <p className="text-gray-600">One-on-one sessions tailored to your specific needs and concerns</p>
+                <h3 className="text-xl font-bold mb-2" style={{ color: "#031621" }}>Individual Therapy</h3>
+                <p style={{ color: "#031621" }}>One-on-one sessions tailored to your specific needs and concerns</p>
               </div>
 
-              <div className="text-center p-6 bg-green-50 rounded-xl">
-                <div className="w-16 h-16 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="text-center p-6 rounded-xl" style={{ backgroundColor: "#f0e7ef" }}>
+                <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center" style={{ backgroundColor: "#d2084f" }}>
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -431,13 +429,13 @@ const ServicesPage = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">Family Counselling</h3>
-                <p className="text-gray-600">Helping families navigate challenges and strengthen relationships</p>
+                <h3 className="text-xl font-bold mb-2" style={{ color: "#031621" }}>Family Counselling</h3>
+                <p style={{ color: "#031621" }}>Helping families navigate challenges and strengthen relationships</p>
               </div>
 
-              <div className="text-center p-6 bg-purple-50 rounded-xl">
-                <div className="w-16 h-16 bg-purple-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="text-center p-6 rounded-xl" style={{ backgroundColor: "#b5e5ef" }}>
+                <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center" style={{ backgroundColor: "#00799e" }}>
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -446,12 +444,12 @@ const ServicesPage = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">Stress Management</h3>
-                <p className="text-gray-600">Techniques and strategies for managing stress and anxiety effectively</p>
+                <h3 className="text-xl font-bold mb-2" style={{ color: "#031621" }}>Stress Management</h3>
+                <p style={{ color: "#031621" }}>Techniques and strategies for managing stress and anxiety effectively</p>
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-purple-600 to-purple-800 rounded-2xl p-8 text-white">
+            <div className="rounded-2xl p-8 text-white" style={{ background: "linear-gradient(135deg, #d2084f 0%, #a00640 100%)" }}>
               <h3 className="text-2xl font-bold mb-4 text-center">Why Choose Our Counselling Services?</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
@@ -476,16 +474,19 @@ const ServicesPage = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center bg-gradient-to-r from-blue-600 to-blue-800 rounded-3xl p-12 text-white">
+        <div className="text-center rounded-3xl p-12 text-white" style={{ background: "linear-gradient(135deg, #00799e 0%, #015a7d 50%, #031621 100%)" }}>
           <h2 className="text-3xl font-bold mb-4">Ready to Start Your Health Journey?</h2>
-          <p className="text-xl opacity-90 mb-8">Book a consultation with Dr. Sanjay R Pal today</p>
+          <p className="text-xl opacity-90 mb-8">Book a consultation with Dr. Sanjay Pal today</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors"
-            onClick={() => navigate('/appointment')}>
+            <button 
+              className="text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105"
+              style={{ backgroundColor: "#d2084f" }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#a00640")}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#d2084f")}
+              onClick={() => navigate('/appointment')}
+            >
               Book Appointment
             </button>
-            
           </div>
         </div>
       </div>
