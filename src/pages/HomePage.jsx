@@ -53,6 +53,9 @@ const useIntersectionObserver = (options = {}) => {
 };
 
 export default function HomePage() {
+  // const [approvedReviews, setApprovedReviews] = useState([]);
+  // const [viewReview, setViewReview] = useState(null);
+
   const [stats, setStats] = useState({
     totalPatients: 500,
     averageRating: 4.9,
@@ -262,11 +265,10 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-20 lg:pt-10 lg:pb-28 z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div
-              className={`space-y-8 transition-all duration-1000 ${
-                heroInView
-                  ? "translate-x-0 opacity-100"
-                  : "-translate-x-10 opacity-0"
-              }`}
+              className={`space-y-8 transition-all duration-1000 ${heroInView
+                ? "translate-x-0 opacity-100"
+                : "-translate-x-10 opacity-0"
+                }`}
             >
               <div className="space-y-6">
                 <div className="flex items-center space-x-3 text-white/80 group">
@@ -465,11 +467,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div
-              className={`relative transition-all duration-1000 ${
-                doctorInView
-                  ? "translate-x-0 opacity-100"
-                  : "-translate-x-10 opacity-0"
-              }`}
+              className={`relative transition-all duration-1000 ${doctorInView
+                ? "translate-x-0 opacity-100"
+                : "-translate-x-10 opacity-0"
+                }`}
             >
               <div
                 className="absolute -inset-6 rounded-3xl opacity-10 blur-xl"
@@ -520,11 +521,10 @@ export default function HomePage() {
             </div>
 
             <div
-              className={`space-y-8 transition-all duration-1000 delay-300 ${
-                doctorInView
-                  ? "translate-x-0 opacity-100"
-                  : "translate-x-10 opacity-0"
-              }`}
+              className={`space-y-8 transition-all duration-1000 delay-300 ${doctorInView
+                ? "translate-x-0 opacity-100"
+                : "translate-x-10 opacity-0"
+                }`}
             >
               <div className="space-y-6">
                 <div
@@ -661,11 +661,10 @@ export default function HomePage() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
-            className={`text-center space-y-6 mb-20 transition-all duration-1000 ${
-              servicesInView
-                ? "translate-y-0 opacity-100"
-                : "translate-y-10 opacity-0"
-            }`}
+            className={`text-center space-y-6 mb-20 transition-all duration-1000 ${servicesInView
+              ? "translate-y-0 opacity-100"
+              : "translate-y-10 opacity-0"
+              }`}
           >
             <div className="flex items-center justify-center space-x-3 text-blue-600 group">
               <div className="p-2 bg-blue-100 rounded-full group-hover:bg-blue-200 transition-colors duration-300">
@@ -838,11 +837,10 @@ export default function HomePage() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
-            className={`text-center space-y-6 mb-20 transition-all duration-1000 ${
-              reviewsInView
-                ? "translate-y-0 opacity-100"
-                : "translate-y-10 opacity-0"
-            }`}
+            className={`text-center space-y-6 mb-20 transition-all duration-1000 ${reviewsInView
+              ? "translate-y-0 opacity-100"
+              : "translate-y-10 opacity-0"
+              }`}
           >
             <div className="flex items-center justify-center space-x-3 text-blue-600 group">
               <div className="p-2 bg-blue-100 rounded-full group-hover:bg-blue-200 transition-colors duration-300">
@@ -880,13 +878,14 @@ export default function HomePage() {
           </div>
 
           <div
-            className={`transition-all duration-1000 delay-300 ${
-              reviewsInView
-                ? "translate-y-0 opacity-100"
-                : "translate-y-10 opacity-0"
-            }`}
+            className={`transition-all duration-1000 delay-300 ${reviewsInView
+              ? "translate-y-0 opacity-100"
+              : "translate-y-10 opacity-0"
+              }`}
           >
             <TestimonialSlider />
+
+            <ReviewList />
           </div>
         </div>
       </section>
@@ -898,11 +897,10 @@ export default function HomePage() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
-            className={`text-center space-y-6 mb-20 transition-all duration-1000 ${
-              blogInView
-                ? "translate-y-0 opacity-100"
-                : "translate-y-10 opacity-0"
-            }`}
+            className={`text-center space-y-6 mb-20 transition-all duration-1000 ${blogInView
+              ? "translate-y-0 opacity-100"
+              : "translate-y-10 opacity-0"
+              }`}
           >
             <div className="flex items-center justify-center space-x-3 text-blue-600 group">
               <div className="p-2 bg-blue-100 rounded-full group-hover:bg-blue-200 transition-colors duration-300">
@@ -945,15 +943,13 @@ export default function HomePage() {
               {blogs.slice(0, 5).map((blog, index) => (
                 <Card
                   key={blog.id}
-                  className={`group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-4 border-0 bg-gradient-to-br from-white to-gray-50/50 hover:from-gray-50 hover:to-gray-100/50 ${
-                    index === 0
-                      ? "md:col-span-2 lg:col-span-2 xl:col-span-2"
-                      : ""
-                  } ${
-                    blogInView
+                  className={`group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-4 border-0 bg-gradient-to-br from-white to-gray-50/50 hover:from-gray-50 hover:to-gray-100/50 ${index === 0
+                    ? "md:col-span-2 lg:col-span-2 xl:col-span-2"
+                    : ""
+                    } ${blogInView
                       ? "translate-y-0 opacity-100"
                       : "translate-y-10 opacity-0"
-                  }`}
+                    }`}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className="relative overflow-hidden">
@@ -963,9 +959,8 @@ export default function HomePage() {
                         "/placeholder.svg?height=300&width=400"
                       }
                       alt={blog.title}
-                      className={`w-full object-cover group-hover:scale-110 transition-transform duration-700 ${
-                        index === 0 ? "h-64" : "h-48"
-                      }`}
+                      className={`w-full object-cover group-hover:scale-110 transition-transform duration-700 ${index === 0 ? "h-64" : "h-48"
+                        }`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
@@ -999,9 +994,8 @@ export default function HomePage() {
                   </div>
 
                   <CardContent
-                    className={`space-y-4 ${
-                      index === 0 ? "p-8" : "p-6"
-                    } relative`}
+                    className={`space-y-4 ${index === 0 ? "p-8" : "p-6"
+                      } relative`}
                   >
                     {/* Meta Information */}
                     <div className="flex items-center justify-between text-sm text-gray-500">
@@ -1028,18 +1022,16 @@ export default function HomePage() {
 
                     {/* Title */}
                     <h3
-                      className={`font-bold text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300 ${
-                        index === 0 ? "text-2xl" : "text-xl"
-                      }`}
+                      className={`font-bold text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300 ${index === 0 ? "text-2xl" : "text-xl"
+                        }`}
                     >
                       {blog.title}
                     </h3>
 
                     {/* Excerpt */}
                     <p
-                      className={`text-gray-600 leading-relaxed ${
-                        index === 0 ? "line-clamp-4 text-lg" : "line-clamp-3"
-                      }`}
+                      className={`text-gray-600 leading-relaxed ${index === 0 ? "line-clamp-4 text-lg" : "line-clamp-3"
+                        }`}
                     >
                       {blog.excerpt}
                     </p>
