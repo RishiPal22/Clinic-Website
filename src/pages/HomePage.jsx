@@ -26,6 +26,7 @@ import ReviewForm from "@/components/ReviewForm";
 import { supabase } from "@/components/SupabaseClient";
 import TestimonialSlider from "@/components/ui/testimonial-slider";
 import { useNavigate } from "react-router-dom";
+import ReviewList from "@/components/ReviewList";
 
 // Custom hook for intersection observer
 const useIntersectionObserver = (options = {}) => {
